@@ -80,7 +80,7 @@
 
 * Kiểm tra cấu hình
 
-![Kiem tra cau hinh](Images/10.png)
+![Kiem tra cau hinh](Images/10.1.png)
 
 <a name ="Note"></a>
 ## Tổng kết
