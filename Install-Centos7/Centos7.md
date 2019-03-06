@@ -114,7 +114,7 @@
 
 ![des1](Images/des1.png)
 
-![des2](Images/des2.png)
+![des2](Images/des2)
 
 * Ấn Done để hoàn tất 
 
