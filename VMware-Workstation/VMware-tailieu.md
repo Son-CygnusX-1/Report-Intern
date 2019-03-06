@@ -76,7 +76,7 @@ sau đó kiểm tra ip **ip a** và ping thử đến 8.8.8.8
 
 * Trong giao diện màn hình chính, chuột phải vào biểu tượng OS trong phần quản lý của My Computer ![snapshot1](Images-VMWare/snapshot1.png) chọn Snapshot -> Take Snapshot
 
-[snapshot](Images-VMWare/snapshot.png)
+[snapshot](Images-VMWare/Snapshot.png)
 
 Đặt tên và mô tả bản snapshot này.
 
