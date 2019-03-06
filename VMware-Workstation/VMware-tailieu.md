@@ -84,11 +84,15 @@ sau đó kiểm tra ip **ip a** và ping thử đến 8.8.8.8
 ### Kiểm tra và chỉnh sửa cấu hình máy ảo
 
 * chuột phải vào biểu tượng OS ![snapshot1](Images-VMWare/snapshot1.png) chọn settings
-
 ![setting](Images-VMWare/setting.png)
 
-Trong bảng cài đặt này, chú ý đến phần *Network Adapter Custom* 
+Trong bảng cài đặt này, chú ý đến phần *Network Adapter Custom*
+
+Ở đây chúng ta có thể chuyển đổi card mạng của máy áo. Hoặc chuyển thành Lan Segment với những máy ảo khác trong hệ thống.
+![setting1](Images-VMWare/network3.png)
+
 
 <a name="Note"></a>
 ## Tổng kết
 
+Kết thúc phần review về VMWare Workstation 15 pro.
