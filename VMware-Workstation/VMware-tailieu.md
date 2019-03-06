@@ -3,10 +3,10 @@
 1. [Giới thiệu](#Gioithieu)
 2. [Các chức năng trong VMware Workstation 15 Pro](#ChucNang)
     2.1 [Các mode network trong VMware](#ModeNet)
-2.2 [Cách thêm và xóa một Network](#AddDele)
-2.3 [Cấu hình DHCP trong VMware](#Dhcp)
-2.4 [Tạo snapshot máy ảo](#Snap)
-2.5 [Kiểm tra và chỉnh sửa cấu hình máy ảo](#KiemTra)
+    2.2 [Cách thêm và xóa một Network](#AddDele)
+    2.3 [Cấu hình DHCP trong VMware](#Dhcp)
+    2.4 [Tạo snapshot máy ảo](#Snap)
+    2.5 [Kiểm tra và chỉnh sửa cấu hình máy ảo](#KiemTra)
 3. [Tổng kết](#Note)
 
 
