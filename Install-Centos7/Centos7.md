@@ -1,4 +1,4 @@
-# VMWare Workstation 15 Pro
+# Install CentOS in VMWare Workstation Pro 15
 
 1. [Giới thiệu](#Overview)
 2. [Cài đặt VMWare](https://websiteforstudents.com/how-to-install-vmware-workstation-pro-15-on-ubuntu-16-04-18-04-18-10/) 
@@ -43,37 +43,46 @@
 
 ![VMWare](Images/1.png)
 
-* Sau đó trỏ va click chuột vào Create a New Virtual Machine, sau đó trỏ đường dẫn đến file .iso cua Centos 7
+* Tại bảng này xuất hiện 2 sự lựa chọn là Typical và Custom. Chúng ta có thể chọn Custom để có thể cài đặt nâng cao như tùy chọn thêm về ổ cứng, card mạng, RAM. Và nếu muốn cài đặt chi tiết sau có thể chọn Typical.
+
+![Tro duong dan](Images/1.1.png)
+
+*  Sau đó có 3 lựa chọn **Use a physical drive** **Use ISO image** **I will install the operating system later**. Với sự lựa chọn đầu tiên, chúng ta có thể chọn vị trí ổ đĩa hoặc thiết bị ngoại vi có lưu trữ file cài đặt để chạy. Với sự lựa chọn thứ 2 chúng ta sẽ trỏ đến vị trí lưu file ISO trong máy.
 
 ![Tro duong dan](Images/2.png)
 
-* Chọn loại hệ điều hành
+* Chọn loại hệ điều hành. Khi chúng ta chọn file ISO hệ thống sẽ biết được đó là OS nào và tự chọn phiên bản cho chúng ta. Nhưng chúng ta vẫn có thể lựa chọn loại OS khác. Nhưng chúng ta nên cài đúng OS chúng ta đã chọn.
 
 ![Chon loai OS](Images/3.png)
 
-* Sau đó trỏ đến đườngng dẫn có thể cài đặt
+* Sau đó chúng ta có thể xem lại tên OS ảo và vị trí lưu của nó trên ổ cứng.
 
 ![Chon duong dan](Images/4.png)
 
-* Chọn kích thước ổ đĩa cho OS
+* Chọn kích thước ổ đĩa cho OS ảo. Với 2 lựa chọn **Store virtual disk as a single file** và **Store virtual disk as a multiple file** nghĩa là chúng ta có thể lựa chọn là nó lưu thành 1 file hay tách chúng ra thành nhiều file nhỏ
 
-![Chon kich thuoc](https://github.com/Son-CygnusX-1/Cai-may-ao-Centos-7/blob/master/Images/5.png)
+![Chon kich thuoc](Images/5.png)
 
-* Kết thúc xem lại cấu hình và finish để bắt đầu cài đặt
+* Kết thúc xem lại cấu hình chúng ta có thể xem lại những cấu hình mà ta đã cài, chúng ta có thể thay đổi những cấu hình đó bằng button **Customize Hardware**. Tôi ví du như chúng ta có thể bỏ device CD/DVD và sound card đi. 
+![Bat dau cai dat](Images/6.png)
 
-![Bat dau cai dat](https://github.com/Son-CygnusX-1/Cai-may-ao-Centos-7/blob/master/Images/6.png)
+* Trỏ chuột đến device và ấn remove
 
-![Man hinh cai dat](https://github.com/Son-CygnusX-1/Cai-may-ao-Centos-7/blob/master/Images/7.png)
+![Bo decive](Images/6.6.png)
+
+* Finish để bắt đầu cài đặt
+
+![Man hinh cai dat](Images/7.png)
 
 * Kết thúc cấu hình, khởi động vào Centos 7
 
-![Ket thuc cau hinh](https://github.com/Son-CygnusX-1/Cai-may-ao-Centos-7/blob/master/Images/9.png)
+![Ket thuc cau hinh](Images/9.png)
 
 * Kiểm tra cấu hình
 
-![Kiem tra cau hinh](https://github.com/Son-CygnusX-1/Cai-may-ao-Centos-7/blob/master/Images/10.png)
+![Kiem tra cau hinh](Images/10.png)
 
 <a name ="Note"></a>
 ## Tổng kết
 
-Kết thúc quá trình cài đặt và cấu hình máy ảo Centos 7 trên phần mềm VMWare Workstation Player 15. 
+Kết thúc quá trình cài đặt và cấu hình máy ảo Centos 7 trên phần mềm VMWare Workstation Pro 15. 
