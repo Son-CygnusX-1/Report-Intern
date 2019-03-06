@@ -47,6 +47,10 @@
 
 ![Tro duong dan](Images/1.1.png)
 
+* Sau đó chọn tính năng phần cứng tương thích cần cho máy áo mình cài đặt.
+
+![Compati](Images/Compati.png)
+
 *  Sau đó có 3 lựa chọn **Use a physical drive** **Use ISO image** **I will install the operating system later**. Với sự lựa chọn đầu tiên, chúng ta có thể chọn vị trí ổ đĩa hoặc thiết bị ngoại vi có lưu trữ file cài đặt để chạy. Với sự lựa chọn thứ 2 chúng ta sẽ trỏ đến vị trí lưu file ISO trong máy.
 
 ![Tro duong dan](Images/2.png)
@@ -59,9 +63,37 @@
 
 ![Chon duong dan](Images/4.png)
 
+*Cấu hình Processors và core per processor
+
+![Nhan](Images/nhan.png)
+
+* Chọn kích thước Ram cho máy ảo
+
+![Ram](Images/ram.png)
+
+* Cấu hình card mạng cho máy ảo
+
+![card](Images/card.png)
+
+* Cấu hình kiểu điều khiển vs các lựa chọn BusLogic (không dùng với các OS 64bit) LSI Logic và LSI Logic SAS
+
+![control](Images/control.png)
+
+* Chọn chuẩn ổ cứng ảo muốn tạo
+
+![disk](Images/disk.png)
+
+* Chọn một loại ổ cứng ảo muốn tạo
+
+![Disk](Images/Disk.png)
+
 * Chọn kích thước ổ đĩa cho OS ảo. Với 2 lựa chọn **Store virtual disk as a single file** và **Store virtual disk as a multiple file** nghĩa là chúng ta có thể lựa chọn là nó lưu thành 1 file hay tách chúng ra thành nhiều file nhỏ
 
 ![Chon kich thuoc](Images/5.png)
+
+* Chọn nơi lưu trữ dữ liệu của ổ cứng ảo
+
+![DiskFile](Images/DiskFile.png)
 
 * Kết thúc xem lại cấu hình chúng ta có thể xem lại những cấu hình mà ta đã cài, chúng ta có thể thay đổi những cấu hình đó bằng button **Customize Hardware**. Tôi ví du như chúng ta có thể bỏ device CD/DVD và sound card đi. 
 ![Bat dau cai dat](Images/6.png)
@@ -70,9 +102,32 @@
 
 ![Bo decive](Images/6.6.png)
 
-* Finish để bắt đầu cài đặt
+* Finish để bắt đầu cài đặt, chọn Date & Time để chỉnh ngày tháng
+
+![date](Images/date.png)
+
+* Chọn installation destination để chỉnh sửa phân vùng bộ nhớ cho máy ảo. Tại đây tick vào i will configure partitioning và Done để chỉnh bằng tay việc chia ổ này.
+
+![des](Images/des.png)
+
+* Chọn loại phân vùng và chia dung lượng ổ
+
+![des1](Images/des1.png)
+
+![des2](Images/des2.png)
+
+* Ấn Done để hoàn tất 
+
+![des3](Images/des3.png)
+
+* Vào Network & Host Name để cấu hình mạng và tên máy ảo. Chọn IPv4 Settings và add bằng tay địa chỉ mạng. Sau đó ấn save và done để lưu lại cấu hình
+
+![addnet](Images/addnet.png)
+
+* Để cho máy ảo Ấn Begin Installation cài đặt.
 
 ![Man hinh cai dat](Images/7.png)
+
 
 * Kết thúc cấu hình, khởi động vào Centos 7
 
