@@ -5,7 +5,7 @@
 3. [Phân biệt Linux và Unix](#Linux)
 4. [Tìm hiểu các phiên bản của CentOS và Ubuntu](#Version)
 5. [Tìm hiểu Kernel, quá trình khởi động của HĐH](#Kernel)
-6. [Tìm hiểu các phân vùng của Ubuntu khi cài đặt](#PhanVung)
+
 
 <a name="LichSu"></a>
 ## Lịch sử phát triển 
