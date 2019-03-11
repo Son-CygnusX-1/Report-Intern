@@ -75,3 +75,7 @@ Sau khi chọn kernel trong file cấu hình của boot loader, hệ thống t�
 
 Init
 Tiến trình này có PID = 1, init là cha của tất cả các tiến trình khác mà có trên hệ thống Linux này. Sau đó, init đọc file /etc/inittab để xác định mức hoạt động.
+
+* Quá trình xử lý khi nhận chương trình:
+
+Đầu tiên CPU sẽ sinh ra một tiến trình, tiến trình này được gửi đến nhân Linux, sau đó Nhân Linux sẽ gửi phản hồi cho Ram, yêu cầu Ram cấp phát bộ nhớ cho chương trình hoạt động. Đồng thời, nhân Linux sẽ tạo báo cáo về tiến trình đó như ID, name, time, vị trí trên Ram,...
