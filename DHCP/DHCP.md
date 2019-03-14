@@ -27,9 +27,32 @@ Gửi từ máy trạm đến máy chủ, yêu cầu các tham số cấu hình 
 
 ## Cấu trúc bản tin DHCP
 
+Hình minh họa cho cấu trúc bản tin DHCP
+
+![struc](image/struc.png)
+| Trường | Dung lượng | Mô tả|
+|------- |-------|------|
+| Opcode | 8 bits | Xác định loại message . Giá trị “1” là request message , “2” là reply message|
+| Hardware type | 8 bits | Quy định cụ thể loại hardware. ![image1](image/01.png) |
+| Hardware length | 8 bits | Quy định chiều dài của hardware address |
+|Hop counts |8 bits|Set bằng “0” bởi client trước khi truyền request và được sử dụng bởi relay agent để control forwarding của BOOTP và DHCP messages .|
+|Transaction Identifier	|32 bits|Được tạo bởi client, dùng để liên kết giữa request và replies của client và server.|
+|Number of seconds |16 bits|được định nghĩa là số giây trôi qua kể từ khi client bắt đầu cố gắng để có được 1 IP hoặc thuê 1 IP mới . Điều này có thể được sử dụng khi DHCP Server bận , để sắp xếp thứ tự ưu tiên khi có nhiều request từ client chưa được giải quyết .|
+|Flags |16 bits|![image2](image/02.png)|
+|Client IP address |32 bits|Client sẽ đặt IP của mình trong field này nếu và chỉ nếu nó đang có IP hay đang xin cấp lại IP, không thì mặc định = 0|
+|Your IP address |32 bits|IP address được server cấp cho client|
+|Server IP address |32 bits|IP address của Sever|
+|Gateway IP address	|32 bits|Sử dụng trong relay agent|
+|Client hardware address |16 bytes|Địa chỉ lớp 2 của client, dùng để định danh|
+|Server host name |64 bytes|Khi DHCP server gửi DHCPOFFER hay DHCPACK thì sẽ đặt tên của nó vào trường này, nó có thể là “nickname” hoặc tên DNS domain|
+|Boot filename |128 bytes|Option được sử dụng bởi client khi request 1 loại boot file trong DHCPDISCOVER message.  Được sử dụng bởi server trong DHCPOFFER để chỉ định path đến boot file directory và filename .|
+|Options |Variable||
+*nguồn https://www.quora.com/How-does-DHCP-work-How-does-a-DHCP-server-send-messages-to-a-DHCP-client*
+
 ## Nguyên lý hoạt động
 
 Hình minh họa cho quá trình
+
 ![Hình minh họa](image/DHCP.png)
 
 ### Mô tả quá trình lấy IP với máy trạm lần đầu kết nối đến DHCP server
@@ -39,7 +62,7 @@ Quá trình lấy địa chỉ IP của máy trạm được mô tả như sau:
 Thông điệp DHCP Discover có IP nguồn: 0.0.0.0;
 IP đích: 255.255.255.255; IP đã từng dùng
 
-#### DHCP Discover
+*DHCP Discover*
 ```
 IP: ID = 0x0; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -87,7 +110,7 @@ DHCP: Discover           (xid=21274A1D)
         DHCP: End of this option field
 ```
 * Mọi máy chủ DHCP có thể nhận thông điệp và chuẩn bị IP cho máy trạm. Nếu có cấu hình phù hợp nó chuẩn bị thông điệp DHCP Offer chứa địa chỉ MAC của khách, địa chỉ IP đề nghị, subnet mask, địa chỉ IP máy chủ và thời gian cho thuê. Địa chỉ đề nghị được đánh dấu "reserve". Máy chủ DHCP phát tán thông tin này trên mạng. Với IP nguồn là IP máy chủ và IP đích là 255.255.255.255
-#### DHCP Offer
+*DHCP Offer*
 ```
 IP: ID = 0x3C30; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -141,7 +164,7 @@ DHCP: Offer              (xid=21274A1D)
 ```
 
 * Khi máy trạm nhận thông điệp đề nghị và chấp nhận một trong các địa chỉ IP, máy trạm phát tán thông điệp này để khẳng định nó đã chấp nhận địa chỉ IP. 
-#### DHCP Request
+*DHCP Request*
 ```
 IP: ID = 0x100; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -191,7 +214,7 @@ DHCP: Request            (xid=21274A1D)
         DHCP: End of this option field
 ```
 * Máy chủ phản hồi DHCP Request với DHCP Pack, hoàn tất cài đặt. Với địa chỉ nguồn vẫn là địa chỉ IP của máy chủ, địa chỉ đích là 255.255.255.255. Phần DHCP tùy chọn xác định gói là ACK
-#### DHCP Ack
+*DHCP Ack*
 ```
 IP: ID = 0x3D30; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -246,7 +269,7 @@ DHCP: ACK                (xid=21274A1D)
 ### Mô tả quá trình lấy IP từ máy trạm đã từng kết nối đến DHCP server.
 
 * Máy khách sẽ gửi bản tin DHCP Request đặc biệt. Trong đó có chứa địa chỉ IP máy trạm đã từng sử dụng.
-#### DHCP Request
+*DHCP Request*
 ```
 IP: ID = 0x0; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -296,7 +319,7 @@ DHCP: Request            (xid=2757554E)
 ```
 * Tại thời điểm này, nếu máy chủ còn địa chỉ IP đó chưa sử dụng, máy chủ sẽ gửi lại bản tin DCHP Pack đồng ý cho máy trạm sử dụng IP đó. Còn nếu máy chủ thấy rằng IP đó đã đc sử dụng, nó sẽ gửi một NACK đến máy trạm
 
-#### DHCP NACK
+*DHCP NACK*
 ```
 IP: ID = 0x3F1A; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -343,7 +366,7 @@ DHCP: NACK               (xid=74A005CE)
 ```
 * Máy trạm sau đó sẽ bắt đầu quá trình khám phá, những gói DHCP Disover vẫn sẽ cố gắng để thuê địa chỉ cũ.
 
-#### DHCP Disover
+*DHCP Disover*
 ```
 IP: ID = 0x100; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
