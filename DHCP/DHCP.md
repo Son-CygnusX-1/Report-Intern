@@ -30,6 +30,8 @@ Gửi từ máy trạm đến máy chủ, yêu cầu các tham số cấu hình 
 Hình minh họa cho cấu trúc bản tin DHCP
 
 ![struc](image/struc.png)
+*nguồn https://www.quora.com/How-does-DHCP-work-How-does-a-DHCP-server-send-messages-to-a-DHCP-client*
+
 | Trường | Dung lượng | Mô tả|
 |------- |-------|------|
 | Opcode | 8 bits | Xác định loại message . Giá trị “1” là request message , “2” là reply message|
@@ -47,7 +49,7 @@ Hình minh họa cho cấu trúc bản tin DHCP
 |Server host name |64 bytes|Khi DHCP server gửi DHCPOFFER hay DHCPACK thì sẽ đặt tên của nó vào trường này, nó có thể là “nickname” hoặc tên DNS domain|
 |Boot filename |128 bytes|Option được sử dụng bởi client khi request 1 loại boot file trong DHCPDISCOVER message.  Được sử dụng bởi server trong DHCPOFFER để chỉ định path đến boot file directory và filename .|
 |Options |Variable||
-*nguồn https://www.quora.com/How-does-DHCP-work-How-does-a-DHCP-server-send-messages-to-a-DHCP-client*
+
 
 ## Nguyên lý hoạt động
 
