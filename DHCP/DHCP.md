@@ -30,6 +30,7 @@ Gửi từ máy trạm đến máy chủ, yêu cầu các tham số cấu hình 
 Hình minh họa cho cấu trúc bản tin DHCP
 
 ![struc](image/struc.png)
+
 *nguồn https://www.quora.com/How-does-DHCP-work-How-does-a-DHCP-server-send-messages-to-a-DHCP-client*
 
 | Trường | Dung lượng | Mô tả|
