@@ -112,6 +112,7 @@ DHCP: Discover           (xid=21274A1D)
         DHCP: End of this option field
 ```
 * Mọi máy chủ DHCP có thể nhận thông điệp và chuẩn bị IP cho máy trạm. Nếu có cấu hình phù hợp nó chuẩn bị thông điệp DHCP Offer chứa địa chỉ MAC của khách, địa chỉ IP đề nghị, subnet mask, địa chỉ IP máy chủ và thời gian cho thuê. Địa chỉ đề nghị được đánh dấu "reserve". Máy chủ DHCP phát tán thông tin này trên mạng. Với IP nguồn là IP máy chủ và IP đích là 255.255.255.255
+
 *DHCP Offer*
 ```
 IP: ID = 0x3C30; Proto = UDP; Len: 328
@@ -166,6 +167,7 @@ DHCP: Offer              (xid=21274A1D)
 ```
 
 * Khi máy trạm nhận thông điệp đề nghị và chấp nhận một trong các địa chỉ IP, máy trạm phát tán thông điệp này để khẳng định nó đã chấp nhận địa chỉ IP. 
+
 *DHCP Request*
 ```
 IP: ID = 0x100; Proto = UDP; Len: 328
@@ -216,6 +218,7 @@ DHCP: Request            (xid=21274A1D)
         DHCP: End of this option field
 ```
 * Máy chủ phản hồi DHCP Request với DHCP Pack, hoàn tất cài đặt. Với địa chỉ nguồn vẫn là địa chỉ IP của máy chủ, địa chỉ đích là 255.255.255.255. Phần DHCP tùy chọn xác định gói là ACK
+
 *DHCP Ack*
 ```
 IP: ID = 0x3D30; Proto = UDP; Len: 328
@@ -271,6 +274,7 @@ DHCP: ACK                (xid=21274A1D)
 ### Mô tả quá trình lấy IP từ máy trạm đã từng kết nối đến DHCP server.
 
 * Máy khách sẽ gửi bản tin DHCP Request đặc biệt. Trong đó có chứa địa chỉ IP máy trạm đã từng sử dụng.
+
 *DHCP Request*
 ```
 IP: ID = 0x0; Proto = UDP; Len: 328
