@@ -30,7 +30,7 @@ Gửi từ máy trạm đến máy chủ, yêu cầu các tham số cấu hình 
 ## Nguyên lý hoạt động
 
 Hình minh họa cho quá trình
-![Hình minh họa](DHCP.png)
+![Hình minh họa](image/DHCP.png)
 
 ### Mô tả quá trình lấy IP với máy trạm lần đầu kết nối đến DHCP server
 Quá trình lấy địa chỉ IP của máy trạm được mô tả như sau:
