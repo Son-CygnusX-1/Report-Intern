@@ -428,12 +428,7 @@ DHCP: Discover           (xid=3ED14752)
         DHCP: Parameter Request List = (Length: 7) 01 0f 03 2c 2e 2f 06
         DHCP: End of this option field
 ```
-## Database DHCP server
 
 ## Tổng kết
 
 Bên trên là những tìm hiểu của tôi về giao thức DHCP, cảm ơn mọi người đã quan tâm.
-
-
-
-
