@@ -11,7 +11,7 @@ Trong phần này tôi sẽ nói về cách để đặt lại mật khẩu root
 
 * Chỉnh sửa trong tùy chọn grub
 
-![chinhsua1 ](Image/chinhsua1.png)
+![chinhsua1 ](Image/chinhsua.png)
 
 ![chinhsua2](Image/chinhsua2.png)
 
