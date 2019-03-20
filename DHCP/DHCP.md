@@ -58,6 +58,13 @@ Hình minh họa cho quá trình
 
 ![Hình minh họa](image/DHCP.png)
 
+Quá trình lấy địa chỉ IP từ DHCP server được chia thành 4 bước chính 
+
+* Bước 1: Máy trạm sẽ gửi bản tin Discover tới toàn mạng bằng giao thưc UDP để tìm máy chủ DHCP.
+* Bước 2: Máy chủ nhận được bản tin Discover gửi lại bản tin Offer tới toàn mạng để máy trạm nhận được, trong đó chứa các thông tin về địa chỉ IP, subnet, dns máy trạm có thể sử dụng.
+* Bước 3: Máy trạm gửi bản tin chấp nhận những thông tin máy chủ gửi hoặc gửi bản tin yêu cầu máy chủ cấp cho địa chỉ IP ưa thích của máy trạm.
+* Bước 4: Máy chủ nếu nhận được thông tin chấp nhận sẽ gửi bản tin Ack. Nếu nhận được bản tin yêu cầu cấp IP và IP đó chưa được sử dụng sẽ gửi lại bản tin DHCP Pack, còn nếu IP đó đã được sử dụng sẽ gửi lại bản tin NAck.
+
 ### Mô tả quá trình lấy IP với máy trạm lần đầu kết nối đến DHCP server
 Quá trình lấy địa chỉ IP của máy trạm được mô tả như sau:
 
@@ -371,9 +378,9 @@ DHCP: NACK               (xid=74A005CE)
         DHCP: Server Identifier      = 157.54.48.151
         DHCP: End of this option field
 ```
-* Máy trạm sau đó sẽ bắt đầu quá trình khám phá, những gói DHCP Disover vẫn sẽ cố gắng để thuê địa chỉ cũ.
+* Máy trạm sau đó sẽ bắt đầu quá trình khám phá, những gói DHCP Discover vẫn sẽ cố gắng để thuê địa chỉ cũ.
 
-*DHCP Disover*
+*DHCP Discover*
 ```
 IP: ID = 0x100; Proto = UDP; Len: 328
     IP: Version = 4 (0x4)
@@ -421,6 +428,7 @@ DHCP: Discover           (xid=3ED14752)
         DHCP: Parameter Request List = (Length: 7) 01 0f 03 2c 2e 2f 06
         DHCP: End of this option field
 ```
+## Database DHCP server
 
 ## Tổng kết
 
