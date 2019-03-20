@@ -5,15 +5,15 @@ Trong phần này tôi sẽ nói về cách để đặt lại mật khẩu root
 
 * Vào màn hình tùy chọn Grub
 
-![tùy chọn](Image/tuychon)
+![tùy chọn](Image/tuychon.png)
 
 Điều này được thực hiện bằng cách khởi động lại máy của hoặc bật máy lên khi máy đang tắt. Khi màn hình khởi động CentOS xuất hiện, nhấn `e` để vào menu tùy chọn Grub.oot
 
 * Chỉnh sửa trong tùy chọn grub
 
-![chinhsua1 ](Image/chinhsua1)
+![chinhsua1 ](Image/chinhsua1.png)
 
-![chinhsua2](Image/chinhsua2)
+![chinhsua2](Image/chinhsua2.png)
 
 Cuộn xuống dòng bắt đầu với `linux` hoặc `linux16`. Thay thế từ `ro` bằng `rw ini=/sysroot/bin/sh`. Sau đó nhấn Ctrl + X để khởi động máy bằng cấu hình vừa cài.
 
