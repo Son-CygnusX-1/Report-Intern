@@ -1,1 +1,98 @@
 # User Environment
+
+## Overview Environment variables
+
+Khi tương tác với máy chủ của bạn thông qua phiên shell, có nhiều trình bao của biên dịch để xác định hành vi của nó và quyền truy cập vào tài nguyên. Một số trong các cài đặt này được chứa trong cài đặt cấu hình và các cài đặt khác được xác định bởi đầu vào của người dùng.
+
+Một cách mà trình bao theo dõi tất cả các cài đặt và chi tiết này là thông qua một khu vực mà nó duy trì được gọi là môi trường. Môi trường là một khu vực mà shell xây dựng mỗi khi nó bắt đầu một phiên chứa các biến xác định các thuộc tính hệ thống.
+
+Trong hướng dẫn này, chúng tôi sẽ thảo luận về các tương tác với môi trường và đọc hoặc đặt các biến môi trường và vỏ tương tác thông qua các tệp cấu hình. 
+
+## Biến môi trường và môi trường hoạt động như thế nào.
+
+Mỗi khi một phiên shell xuất hiện, một quy trình sẽ diễn ra để thu thập và biên dịch thông tin cần có cho quy trình shell và các quy trình con của nó. Nó lấy dữ liẹu cho các cài đặt này từ nhiều tệp và cài đặt khác nhau trên hệ thống.
+
+Về cơ bản, môi trường cung cấp một phương tiện để qua đó quá trình shell có thể nhận hoặc thiết lập các cài đặt đến nó, chuyển các quy trình này sang các quy trình con của nó.
+
+Môi trường được triển khai dưới dạng các chuỗi đại diện cho các cặp Key-Value. Nếu nhiều giá trị được truyền, chúng thường được phân tách bằng dấu hai chấm (:)
+`KEY = value1 : vlue2 : ... `
+
+Các khóa trong các kịch bản này là biến. Chúng có thể là một trong hai loại, biến môi trường hoặc biến shell.
+
+Biến môi trường là các biến được xác định cho shell hiện tại và được kế thừa bởi bất kỳ shell hoặc tiến trình con nào. Các biến môi trường được sử dụng để truyền thông tin vào cac quy trình được sinh ra từ shell.
+
+Biến shell là các biến được chứa riêng trong shell mà chúng được đặt hoặc được xác định. Chúng thường được  sử dụng để theo dõi dữ liệu không bền vững, như thư mục làm việc hiện tại.
+
+Theo quy ước, các loại biến này thường được xác định bằng cách sử dụng tất cả các chữ in hoa. Điều này giúp người dùng phân biệt các biến môi trường trong các bối cảnh khác.
+
+## Print sheel và biến môi trường
+
+Mỗi phiên shell theo dõi các biến môi trường và shell riêng của nó. Chúng ta có thể truy cập chúng theo một vài cách khác nhau.
+
+Chúng ta có thể thấy một danh sách tất cả các biến môi trường của chúng ta bằng cách sử dụng lệnh `env` hoặc `printenv`. Ở trạng thái mặc định, chúng sẽ hoạt động giống hệt nhau.
+
+Sự khác biệt của hai lệnh chỉ rõ ràng trong chức năng cụ thể hơn của chúng. Chẳng hạn, `printenv` có thể yêu cầu các giá trị của các biến riêng lẻ:
+
+```
+printenv SHELL
+```
+> /bin/bash
+
+Mặt khác, `env` để bạn sửa đổi môi trường mà các chương trình chạy bằng cách chuyển một tập hợp các định nghĩa biến thành một lệnh như sau:
+
+```
+env VAR1="blahblah" command_to_run command_option
+```
+Vì, như chúng ta biết các quy trình con thường kế thừa các biến môi trường của quy trình cha, điều này cho bạn cơ hội để ghi đè các giá trị hoặc thêm các biến bổ sung.
+
+### Một số biến môi trường phổ biến:
+
+* SHELL: Mô tả trình bao sẽ diễn giải bất kỳ lệnh nào bạn nhập. Trong hầu hết các trường hợp, nó sẽ đc bash theo mặc định, nhưng các giá trị khác có thể được đặt nếu bạn thích các tùy chọn khác.
+* USE: Người dùng đăng nhập hiện tại
+* PATH: Một danh sách các thư mục mà hệ thống sẽ kiểm tra khi tìm kiếm các lệnh. Khi người dùng gõ một lệnh, hệ thống sẽ kiểm tra các thư mục theo thứ tự này để thực thi.
+* HOME: Thư mục home của người dùng hiện tại.
+
+### Ngoài các biến môi trường này, một số biến vỏ mà bạn thường thấy là:
+
+* HOSTNAME: Tên máy chủ của máy tính tại thời điểm hiện tại.
+* UID: UID của người dùng hiện tại.
+* BASH_VERSION: Phiên bản của bash đang được thực thi, ở dạng người đọc.
+
+## Cài đặt Shell và Biến môi trường
+
+### Tạo biến Shell
+
+```
+TEST_VAR='Hello World!'
+```
+
+### Tạo biến môi trường
+
+Trong Ubuntu, biến môi trường mặc định được đặt trong file ~/.bashrc. Nếu bạn sử dụng zsh thay cho bash thì sẽ là ~/.zshrc. Sau khi tìm được file này, bạn lên bảng text editor của mình và thêm dòng:
+```
+export GMAIL_USERNAME="myname@gmail.com"
+```
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

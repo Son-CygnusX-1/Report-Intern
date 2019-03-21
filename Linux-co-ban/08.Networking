@@ -1,0 +1,30 @@
+# Networking
+
+## Khái niệm 
+
+Mạng (mạng máy tính) là thực hành vận chuyển và trao đổi dữ liệu giữa các nút qua một phương tiện được chia sẻ trong một hệ thống thông tin.
+Mạng máy tính cho phép các thiết bị và thiết bị đầu cuối được kết nối với nhau trên mạng cục bộ(Lan) hoặc mạng lớn hơn (Wan, Internet). Đây là một chức năng thiết yếu cho các nhà cung cấp dịch vụ, doanh nghiệp và người tiêu dùng để chia sẻ tài nguyên, sử dụng hoặc cung cấp dịch vụ.
+
+## Network interfaces
+
+Network interfaces là kênh kết nối giữa device và network. Về mặt vật lý, Network interfaces chính là network interface card (NIC). Một hệ thống có thể có nhiều card mạng cùng hoạt động.
+
+Trong window dùng lệnh ipconfig để kiểm tra, trong Linux dùng ifconfig.
+
+File cấu hình nằm trong 
+
+`/etc/network/interfaces` đối với Debian
+`/etc/sysconfig/network-scripts/ficfg-eth0` đối với RedHat
+`/etc/sysconfig/network` đối với SUSE
+
+## Routing table
+
+Lệnh `ip route` được dùng để xem bảng định tuyến 
+
+Một số lệnh thêm hoặc xóa các route trong bản định tuyến
+```
+route add <ip> gw <gateway>
+route delete <ip> gw <gateway>
+route add -net <ipnet> netmask <netmask> gw <gate> ens33
+route delete -net <ipnet> netmask <netmask> gw <gate> ens33
+```

@@ -7,7 +7,7 @@
     * [Cấu hình DHCP trong VMware](#Dhcp)
     * [Tạo snapshot máy ảo](#Snap)
     * [Kiểm tra và chỉnh sửa cấu hình máy ảo](#KiemTra)
-3. [Tổng kết](#Note)
+3. [Note](#Note)
 
 
 <a name="Gioithieu"></a>
@@ -25,7 +25,7 @@
 
 * **Bridged**
 
-Sao chép một nút mạng khác trên mạng vật lý và máy ảo sẽ nhận được IP của nó (Nếu DHCP được kich hoạt trong mạng
+Sao chép một nút mạng khác trên mạng vật lý và máy ảo sẽ nhận được IP của nó (Nếu DHCP được kich hoạt trong mạng)
 
 * **NAT**
 
@@ -92,7 +92,18 @@ Trong bảng cài đặt này, chú ý đến phần *Network Adapter Custom*
 ![setting1](Images-VMWare/network3.png)
 
 
-<a name="Note"></a>
-## Tổng kết
+### Cấu hình SSH từ máy ảo dùng card mạng Bridged vào máy ảo dùng card mạng Nat
 
-Kết thúc phần review về VMWare Workstation 15 pro.
+* Chuẩn bị 2 máy ảo một máy có địa chỉ IP 192.168.0.186 dùng Bridged để ra mạng và một máy có địa chỉ IP 192.68.230.129 dùng Nat để ra mạng.
+* Mục tiêu: từ máy 0.186 có thể ssh sang máy 230.129 (Sử dụng port forwarding).
+
+    Thêm port forwarding
+    
+![setting1](Images-VMWare/setting1.png)
+
+![portfor](Images-VMware/portfor.png)
+
+
+
+<a name="Note"></a>
+## Note
