@@ -73,7 +73,11 @@ Trong Ubuntu, biến môi trường mặc định được đặt trong file ~/.
 export GMAIL_USERNAME="myname@gmail.com"
 ```
 
-        
+## User and Group
+
+Command chuyển đổi group: `newgrp < group name>`
+Thêm User mới: `useradd`
+
 
 
 
