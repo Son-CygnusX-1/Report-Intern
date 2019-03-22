@@ -1,0 +1,12 @@
+# Quản lý người dùng và nhóm người dùng trong Linux
+
+Có 3 kiểu tài khoản trên một hệ thống Linux:
+* **Tài khoản gốc (Root accout)**: Còn được gọi là superuser và sẽ có sự điều khiển tuyệt đối tới hệ thống. Một superuser có thể chạy bất cứ lệnh nào mà không bị hạn chế. Người sử dụng này có thể được ví như người quản lý hệ thống.
+* **Các tài khoản hệ thống**: Các tài khoản hệ thóng được cần cho các hoạt dodọng riêng trong hệ thống như tài khoản mail và các tài khoản sshd. Những tài khoản này thường được cần cho một số chức năng riêng trên hệ thống của bạn, và bất cứ sự chỉnh sửa nào tới chúng có thể ảnh hưởng bất lợi tới hệ thống.
+* **Các tài khoản người dùng cá nhân**: Các tài khoản này cung cấp sự truy cập mang tính tươnng tác tới hệ thống với người dùng và nhóm sử dụng thường bị giới hạn truy cập vào những file và thư mục có tính chất quan trọng.
+
+Có 4 file chính quản lý người dùng:
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/gshadow : File này chứa thông tin tài khoản nhóm bảo mật

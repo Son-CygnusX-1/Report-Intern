@@ -61,9 +61,9 @@ Ubuntu đặt tên phiên bản theo 2 số cuổi của năm phát hành, và c
 * Quá trình khởi động của hệ điều hành:
 
 Khi bạn tao tác ấn nút nguồn trên máy tính, BIOS là chương trình chạy đầu tiên. BIOS thực hiện một công việc gọi là POST. Quá trình này sẽ kiểm tra tính sẵn sàng của phần cứng nhằm kiểm tra thông số và trạng thái của các phần cứng máy tính khác như bộ nhớ, CPU, card mạng,...
-Nếu quá trình POST kết thúc thành công, thì sai đó BIOS sẽ cố gắng tìm kiếm và khởi chạy (boot) mộ hệ điều hành đwọc chứa trong các thiết bị lưu trữ như ổ cứng, CD/DVD, USB
+Nếu quá trình POST kết thúc thành công, thì sau đó BIOS sẽ cố gắng tìm kiếm và khởi chạy (boot) mộ hệ điều hành đwọc chứa trong các thiết bị lưu trữ như ổ cứng, CD/DVD, USB
 
-Sau đó nó sẽ tìm đến MBR(Mastẻ Boot Record) tại sector đầu tiên của ổ đĩa cứng đầu tiên. vd /dev/hda or /dev/dsa/
+Sau đó nó sẽ tìm đến MBR(Master Boot Record) tại sector đầu tiên của ổ đĩa cứng đầu tiên. vd /dev/hda or /dev/dsa/
 MBR chứa các chỉ dẫn cho biết cách nạp trình quản lý khởi động GRUB/LILO cho Linux hay BOOTMGR cho Windows (7,8)
 
 Boot Loader

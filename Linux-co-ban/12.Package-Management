@@ -1,0 +1,38 @@
+# Quản lý trong Centos (Yum và RPM)
+
+## Khái niệm
+
+Cả Yum và RPM đều là trình quản lý gói tin sử dụng trên dòng lệnh với mã nguồn mở.
+
+## Sự khác biệt giữa Yum và RPM
+
+|STT|Tính năng|Yum|RPM|
+|---|---------|---|---|
+|1|Tự động đặt thêm các package yêu cầu. Ví dụ như khi thực hiện cài đặt X, dịch vụ này yêu cầu thêm package Y thì yum sẽ tìm kiếm và cài đặt Y một cách tự động | Có | Không|
+|2|Không cho phép cài nhiều phiên bản của 1 dịch vụ cùng 1 lúc|Không|Có|
+|3|Kết nối đến Repository|Có|Không|
+|4|Tự động cập nhật package|Có|Không|
+
+
+## Các lệnh quản lý với Yum
+
+* yum install package-name(s) - Cài đặt các gói cùng với bất kỳ phụ thuộc yêu cầu
+* yum remove package-name(s) - Loại bỏ các gói cụ thể từ hệ thống của bạn
+* yum search search-pattern - Tìm kiếm danh sách các tên gói và mô tả cho các gói phù hợp với mô hình tìm kiếm và cung cấp một danh sách các tên gói, với kiến trúc và mô tả ngắn gọn về các nội dung gói.
+* yum deplist package-name(s) - Danh sách tất cả các thư viện và các module mà gói có tên phụ thuộc vào, cùng với tên của các gói (bao gồm cả các phiên bản) cung cấp phụ thuộc.
+* yum check-update - làm mới bộ nhớ cache cục bộ của cơ sở dữ liệu yum vì vậy thông tin phụ thuộc và các gói mới nhất luôn được cập nhật.
+* yum info package-name(s) - Kết quả của lệnh info cung cấp tên, mô tả của gói, cũng như liên kết tới trang chủ cho phần mềm, phiên bản phát hành và kích thước cài đặt của phần mềm.
+* yum reinstall package-name(s) - Xóa và sau đó tải về một bản sao mới của tập tin gói và cài lại đặt các phần mềm trên hệ thống của bạn
+* yum localinstall local-rpm-file - Kiểm tra sự phụ thuộc của một file .rpm địa phương và sau đó cài đặt nó
+* yum update optional-package-name(s) - Tải xuống và cài đặt tất cả các bản cập nhật bao gồm các bản vá lỗi, phiên bản bảo mật và nâng cấp, được cung cấp bởi các nhà phân phối của hệ thống điều hành của bạn.
+* yum upgrade - Nâng cấp tất cả các gói được cài đặt trong hệ thống của bạn lên phiên bản mới nhất.
+
+## Các lệnh quản lý với RPM
+Các lệnh sau chạy dưới quyền user root.
+* rpm --install --verbose --hash local-rpm-file-name.rpm or rpm -ivh filename.rpm - Cài đặt gói rpm từ tập tin. rpm cũng có khả năng cài đặt các file RPM từ nguồn http và ftp.
+* rpm --erase package-name(s) hoặc rpm -e - Loại bỏ các gói. Thông thường sẽ không hoàn thành nếu package-name phù hợp với nhiều hơn một gói.
+* rpm --query --all hoặc rpm -qa - liệt kê tên của tất cả các gói cài đặt hiện tại.
+* rpm --query package-name(s) hoặc rpm -q - cho phép bạn để xác nhận liệu một gói đã được cài đặt trong hệ thống của bạn chứa.
+* rpm --query --info package-name(s) hoặc rpm -qi - hiển thị các thông tin về một gói cài đặt
+* rpm --query --list package-name(s) hoặc rpm -ql - tạo ra một danh sách các tập tin cài đặt của một gói phần mềm chỉ định. Điều này được bổ sung bởi:
+* rpm --query --file hoặc rpm -q qf filename - kiểm tra để xem gói được cài đặt sở hữu các tập tin nào.

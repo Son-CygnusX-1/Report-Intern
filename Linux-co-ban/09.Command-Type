@@ -1,0 +1,17 @@
+Các loại command có trên Linux:
+* alias (command là shell alias)
+* keyword (command là shell reserved word)
+* function (command là shell function)
+* builtin (command là shell builtin)
+* file (command là disk file)
+
+Xác định các loại command bằng lệnh `type -t `
+Ví dụ  
+
+| Command | Output | Meaning |
+|---------|--------|---------|
+|type -t ls| alias | Lệnh ls được xác định bằng cách nhập nhập lệnh tại dấu nhắc shell |
+|type -t date| file | Lệnh `date` là một tệp đĩa (lệnh bên ngoài) được xác định bằng cách ban hành lệnh date tại dấu nhắc shell|
+|type -t xrpm| function | `xrpm` là một chức năng xác định người dùng |
+|type -t if | keyword | `if` là một từ dành riêng shell, được sử dụng để kiểm soát lưu thông|
+|type -t pwd| builtin | `pwd` là một shell builtin command|
