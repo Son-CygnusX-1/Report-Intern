@@ -4,7 +4,10 @@
 
 DHCP (Dynamic Host Configuration Protocol) là một giao thức cho phép cấp phát địa chỉ IP một cách tự động cùng với các cấu hình liên quan như subnet mask, gateway mặc định và DNS. Nó cung cấp một database trung tâm để theo dõi tất cả các máy tính trong hệ thống mạng.
 
-DHCP là phần mở rộng của Bootstrap Protocol(BOOTP).
+DHCP là phần mở rộng của Bootstrap Protocol(BOOTP). 
+
+Với DHCPv4 Máy chủ dùng cổng 67 là cổng đích, còn máy khách dùng cổng 68.
+Với DHCPv6 Máy chủ dùng cổng 547 để lắng nghe, còn máy khách dùng cổng 546.
 
 ## Các loại bản tin trong DHCP
 
