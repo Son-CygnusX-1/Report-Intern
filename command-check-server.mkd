@@ -1,0 +1,218 @@
+# Tìm hiểu phần cứng qua các thông tin Server
+
+## Lấy thông tin CPU
+```
+dmidecode -t processor | grep -i version
+Version: InteIntel(R) Xeon(R) CPU       L5520   @ 2.27GHz
+Version: InteIntel(R) Xeon(R) CPU       L5520   @ 2.27GHz
+```
+Máy chủ 2 CPU, loại Xeon L5520, hoạt động ở xung 2.27GHz
+
+```
+dmidecode -t process | grep -i cache
+L1 Cache Handle: 0x0005
+L2 Cache Handle: 0x0006
+L3 Cache Handle: 0x0007
+L1 Cache Handle: 0x0009
+L2 Cache Handle: 0x000A
+L3 Cache Handle: 0x000B
+```
+CPU có 3 tầng cache
+```
+dmidecode -t processor  | grep -i count
+
+TSC (Time stamp counter)
+        Core Count: 4
+        Thread Count: 8
+TSC (Time stamp counter)
+        Core Count: 4
+        Thread Count: 8
+```
+Mỗi CPU có base là 4 core nhưng dùng công nghệ hyper nên máy sẽ hiểu là chạy 8 core. Nhưn thực tế nó chỉ giúp tăng 30% hiệu năng của 4 core.
+```
+lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit -> có hỗ trợ x64
+Byte Order:            Little Endian
+CPU(s):                16 -> 16 cores
+On-line CPU(s) list:   0-15
+Thread(s) per core:    2 -> hyper threading
+Core(s) per socket:    4 -> mỗi socket có 4 core
+Socket(s):             2 -> 2 CPU
+NUMA node(s):          2
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 26
+Stepping:              5
+CPU MHz:               2266.542
+BogoMIPS:              4532.68
+Virtualization:        VT-x -> có hỗ trợ ảo hóa
+L1d cache:             32K -> độ lớn L1, L2, L3 cache
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              8192K
+NUMA node0 CPU(s):     0-3,8-11
+NUMA node1 CPU(s):     4-7,12-15
+```
+## Lấy thông tin về linux kernel
+```
+uname -r
+```
+## Lấy thông tin về OS distribution
+```
+cat /etc/issue
+CentOS release 6.7 (Final)
+Kernel \r on an \m
+```
+## Lấy thông tin về memory
+```
+free -m
+             total       used       free     shared    buffers     cached
+Mem:         15939        424      15515          0         13        167
+-/+ buffers/cache:        242      15697 
+Swap:         1999          0       1999 
+
+```
+Tổng 16G, swap 2G
+```
+dmidecode -t memory | grep -i "Number of devices"
+Number Of Devices: 12
+```
+Hỗ trợ 12 slot để cắm memory
+```
+dmidecode -t memory | grep -i "Maximum"
+Maximum Capacity: 384 GB
+```
+memory tối đa là 384G
+
+Memory tối đa phụ thuộc loại CPU Ví dụ
+E3-1230 hỗ trợ tối đa 32G
+```
+dmidecode -t memory | grep -i "Manufacturer"
+        Manufacturer: Micron        
+        Manufacturer:               
+        Manufacturer: Micron        
+        Manufacturer:               
+        Manufacturer:               
+        Manufacturer:               
+        Manufacturer: Micron        
+        Manufacturer:               
+        Manufacturer: Micron        
+        Manufacturer:               
+        Manufacturer:               
+        Manufacturer:
+```
+Như vậy memory thuộc nhà sản xuất Micron, căn cứ trên output có thể thấy server này có 4 thanh memory, tổng memory lúc xem qua free là 16G nên mỗi thanh sẽ là 4G. Để chắc chắn thì:
+```
+dmidecode -t memory | grep -i "size"
+        Size: 4096 MB
+        Size: No Module Installed
+        Size: 4096 MB
+        Size: No Module Installed
+        Size: No Module Installed
+        Size: No Module Installed
+        Size: 4096 MB
+        Size: No Module Installed
+        Size: 4096 MB
+        Size: No Module Installed
+        Size: No Module Installed
+        Size: No Module Installed
+```
+Đúng là 4G mỗi thanh
+```
+dmidecode -t memory | grep -i "speed"
+        Speed: 1066 MHz
+        Speed: Unknown
+        Speed: 1066 MHz
+        Speed: Unknown
+        Speed: Unknown
+        Speed: Unknown
+        Speed: 1066 MHz
+        Speed: Unknown
+        Speed: 1066 MHz
+        Speed: Unknown
+        Speed: Unknown
+        Speed: Unknown
+```
+Mỗi thanh chạy với speed 1066Mhz
+```
+dmidecode -t memory | grep -i "Part"
+        Part Number: 18KSF51272PZ-1G6K1
+        Part Number:                   
+        Part Number: 18KSF51272PZ-1G6K1
+        Part Number:                   
+        Part Number:                   
+        Part Number:                   
+        Part Number: 18KSF51272PZ-1G6K1
+        Part Number:                   
+        Part Number: 18KSF51272PZ-1G6K1
+        Part Number:                   
+        Part Number:                   
+        Part Number:   
+```
+Mã sản phẩm là 18KSF51272PZ-1G6K1
+Thông tin part number dùng để tra cứu thông tin về toàn bộ memory để thay thế sau này
+## Lấy thông tin slab
+```
+cat /proc/meminfo  | grep -i slab
+Slab:              55676 kB
+```
+Khoảng 56M
+## Lấy thông tin main
+```
+dmidecode -t baseboard
+# dmidecode 2.12
+SMBIOS 2.6 present.
+
+Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+        Manufacturer: Supermicro
+        Product Name: X8DTT
+        Version: 2.0       
+        Serial Number: OM19S32637
+        Asset Tag: 1234567890
+        Features:
+                Board is a hosting board
+                Board is replaceable
+        Location In Chassis: 1234567890
+        Chassis Handle: 0x0003
+        Type: Motherboard
+        Contained Object Handles: 0
+```
+Một số loại main Supermicro hỗ trợ IPMI, một bộ đặc tả giao tiếp cho phép quản trị viên truy cập từ xa vào server khi có sự cố nghiêm trọng ví dụ không thể SSH được: do hỏng raid, kernel panic, lỗi memory, hay như có lần mình dùng lệnh fuser bất cẩn khiến sshd bị kill... Trong trường hợp này bạn chỉ có thể lên DC xem trực tiếp, hoặc nhờ DC cắm KVM. Nhưng cả hai giải pháp trên đều chậm trễ. Nay với IPMI, bạn có thể remote ngay lâp tức. Giải pháp này yêu cầu main phải hỗ trợ và trên các loại main này thường sẽ có bố trí một dedicated network LAN port dành riêng cho IPMI.
+## Lấy thông tin network card
+```
+lspci | egrep -i ‘network|ethernet’
+
+e1000e00:19.0 Ethernet controller: Intel Corporation 82579LM Gigabit Network Connection (rev 05)
+02:00.0 Ethernet controller: Intel Corporation 82574L Gigabit Network Connection
+```
+Loại network card sử dụng phải tương ứng với main
+Quay về main X9SCL, xem spec của nó có thể thấy nó hỗ trợ:
+2x Gigabit Ethernet LAN ports: Intel® 82579LM and Intel® 82574L
+
+Network card thường cắm trên chuẩn khe PCI-e. Thông qua PCI-e để giao tiêp với main. Main X9SCL hỗ trợ 
+2 (x8) PCI-E 3.0 in x8 slots***
+1 (x4) PCI-E 2.0 in x8 slots
+2 khe loại x8 tốc độ x8 chuẩn PCI-e 3.0
+1 khe loại x8 nhưng tốc độ x4 chuẩn PCI-e 2.0
+
+Về bandwidth mỗi lane và mỗi chuẩn PCI-e bạn có thể xem trong:
+https://serverfault.com/questions/11633/whats-the-bandwidth-and-form-factor-for-pcie-x1-x4-x8-and-x16
+
+Căn cứ vào đó thì có thể thấy PCI-e 2.0 tốc độ x4 tương đương với 2GB/s. Rất lớn nên không lo bottle neck cho các thiết bị khác giao tiếp. Network card tốc độ có đến 1Gbps có port channel thêm cũng chỉ lên đến 2Gbps, cũng không khiến bị bottle neck tại tầng PCI-e.
+
+## Lấy thông tin Raid
+```
+lspci | grep -i raid
+00:1f.2 RAID bus controller: Intel Corporation 6 Series/C200 Series Chipset Family SATA RAID Controller (rev 05)
+```
+Raid này là onboard, disk sẽ dùng chuẩn SATA để giao tiếp với main. Trường hợp dùng card raid rời thì card raid đó cũng cắm qua khe PCI-e. Thông qua PCI-e để giao tiêp với main
+
+Loại raid, số lượng disk, giao tiếp giua card raid và disk cũng là một ràng buộc của main. Ví dụ main X9SCL chỉ hỗ trợ 
+6x SATA2 (3Gb/s) w/ RAID 0, 1, 5, 10
+Hỗ trợ 6 disk
+
+SATA2 là giao tiếp giua raid controller và disk controller
+
+Vì số lượng PCI-e trên một main có giới hạn nên bạn không thể mở rộng liên tục các thiết bị ngoại vi được.

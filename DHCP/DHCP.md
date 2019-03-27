@@ -432,6 +432,12 @@ DHCP: Discover           (xid=3ED14752)
         DHCP: End of this option field
 ```
 
+## Giải quyết tình huống
+
+* Câu hỏi đặt ra: DHCP server full slot cho IP khả dụng, nhưng thực tế là không có người dùng nào đang sử dụng, IP đã được đặt chỗ và không thể sử dụng cho người khác mặc dù hiện tại người dùng (tất cả người dùng) đó đang ngắt kết nối.
+
+Trong tình huống này, DHCP server không thể tự động cấp pháp IP cho máy trạm được, vì cơ chế của DHCP server không cho phép. Để máy mới có thể xin đcủ IP, người quản trị phải xen vào hệ thống DHCP server và tác động vào để giúp cho máy trạm có thể lấy được IP từ máy chủ DHCP.
+
 ## Tổng kết
 
 Bên trên là những tìm hiểu của tôi về giao thức DHCP, cảm ơn mọi người đã quan tâm.
