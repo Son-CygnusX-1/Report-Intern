@@ -1,0 +1,41 @@
+#Network File System
+
+## Khái niệm
+
+Dịch vụ NFS cho phép chia sẻ tập tin cho nhiều người dùng trên cùng mạng hoạt động theo mô hình Client-Server
+
+## Cài đặt và cấu hình
+* Cài đặt
+Trên centOS
+```
+yum install nfs-utils
+```
+
+Trên Ubuntu
+```
+apt-get install nfs-kernel-server nfs-common
+```
+* Cấu hình
+Bài lab thực hiện khi tường lửa của cả bên phía Client và Server đều đã được tắt, việc này sẽ giúp cấu hình đơn giản hơn.
+
+Trên server:
+bật service lên bằng lệnh
+```
+systemctl enable nfs-server.service
+systemctl start nfs-server.service
+```
+Tạo thư mục chia sẻ trên Server `mkdir /var/shared` và cấp quyền `chown root:root /var/shared`
+
+Khai báo trong file `/etc/exports`: `/var/shared 192.168.230.129(rw, sync,no_subtree_check)`
+Thực hiện update `exportfs -a`
+
+Trên Client:
+Tạo thư mục local và mount đến Server: 
+```
+mkdir /shared-client
+mount 192.168.230.129:var/shared /share-client
+```
+Kiểm tra phân vùng vừa tạo `df -h`
+
+![nfs](images_Linux/nfs.png)
+
