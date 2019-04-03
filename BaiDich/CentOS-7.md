@@ -164,7 +164,7 @@ Nâng cấp phiên bản hệ điều hành, ví dụ 7.3 lên 7.4
 ```
 yum upgrade
 ```
-vim
+## vim
 
 ```
 yum install vim
@@ -400,11 +400,12 @@ Số lượng mô tả tệp mở tối đa cho một quy trình, nr_open là s�
 ```
 
 Sửa đổi
-`http://blog.csdn.net/superchanon/article/details/13303705`
 
-`http://blog.51cto.com/qujunorz/1703295`
+![](http://blog.csdn.net/superchanon/article/details/13303705)
 
-`https://unix.stackexchange.com/questions/127777/how-to-configure-the-process-open-file-limit-of-a-user`
+![](http://blog.51cto.com/qujunorz/1703295)
+
+![](https://unix.stackexchange.com/questions/127777/how-to-configure-the-process-open-file-limit-of-a-user)
 
 
 
