@@ -10,7 +10,7 @@ Trong Linux, file /etc/passwd là file lưu thông tin user của hệ thống, 
 
 Nghĩa là thông tin của User có thể được xem bởi bất kỳ User nào trên hệ thống. Tuy nhiên thuộc tính 'r' là cần thiết vì một số ứng dụng và tool của hệ thống cần đọc file này thì mới có thể chạy chính xác được. Đơn giản như muốn thay đổi tài khoản người dùng khác, nếu chúng ta để file Passwd ở quyền dùng root thì hệ thống của người dùng bình thường sẽ không thể đọc được file Passwd để lấy thông tin user name, home directory...
 
-Vì vậy cần lưu trữ password người dùng trong 1 file mà chỉ 'root' mới đọc được. 
+Vì vậy cần lưu trữ password người dùng trong 1 file mà chỉ 'root' mới đọc được.
 
 Giải pháp mà Linux đưa ra là bổ sung 1 file tên là `etc/shadow` để lưu trữ mật khẩu người dùng. Và file này chỉ được truy cập bởi tài khoản root. Và dĩ nhiên mật khẩu trong file shadow được mã hóa bởi hàm băm.
 
