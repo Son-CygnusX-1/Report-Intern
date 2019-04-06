@@ -1,0 +1,147 @@
+# LVM (Logical Volume Manager)
+
+## Giới thiệu
+
+* LVM: là phương pháp cho phép ấn định không gian đĩa cứng thành những logical Volume khiến cho việc thay đổi kích thước trở nên dễ dàng hơn (so với partition). Với kỹ thuật LVM bạn có thể thay đổi kích thước mà không cần sửa lại table của OS. Điều này thật hữu ích với những trường hợp sử dụng hết bộ nhớ còn trống của partition và muốn mở rộng dung lượng của nó.
+* Vai trò: 
+    - Không để hệ thống bị gián đoạn
+    - Không làm hỏng dịch vụ
+    - Có thể kết hợp Hot Swapping
+* Thành phần trong LVM
+
+Mô hình
+
+![LVM1](images_Linux/LVM1.png)
+
+**Hard drives - Drives**
+Thiết bị lưu trữ dữ liệu, ví dụ là `/dev/sda` , `dev/sdb`,...
+**Partition**
+Partition là các phân vùng của Hard drives, mỗi Hard drives có 4 partition, trong đó partition có 2 loại
+    - Primary partition: Phân vùng chính, có thể khởi động, mỗi ổ cứng có thể có tối đa 4 phân vùng này.
+    - Extended partition: phân vùng mở rộng, có thể tao những vùng luân lý.
+**Physical Volumes**
+Là một gói khác của partition trong kỹ thuật LVM, nó là những thành phần cơ bản được sử dụng bởi LVM. Một Physical Volume không thể mở rộng ra ngoài phạm vi một ổ đĩa.
+Có thể kết hợp nhiều Physical Volume thành Volume Groups
+**Volume Group**
+Nhiều Physical Volume trên những ổ đĩa khác nhau được kết hợp lại thành một Volume Group. Volume group có thể tạo ra các Logical Volume, trong đó người ta có thể tạo, thay đổi kích thước, lưu trữ, gỡ bỏ và sử dụng.
+*Lưu ý: Boot loader không thể đọc /boot khi nó nằm trên Logical Volume Group. Do đó không thể sử dụng kỹ thuật LVM với /boot mount point*
+**Logical Volume**
+Volume Group được chia nhỏ thành nhiều Logical Volume, mỗi Logical Volume có ý nghĩa tương tự như partition. Nó được dùng cho các mount point và được format với những định dạng khác nhau như ext2, ext3, ext4,…
+Khi dung lượng của Logical Volume được sử dụng hết ta có thể đưa thêm ổ đĩa mới bổ sung cho Volume Group và do đó tăng được dung lượng của Logical Volume
+**File Systems**
+    - Tổ chức và kiểm soát các tập tin
+    - Được lưu trữ trên ổ đĩa cho phép truy cập nhanh chóng và an toàn
+    - Sắp xếp dữ liệu trên đĩa cứng máy tính
+    - Quản lý vị trí vật lý của mọi thành phần dữ liệu
+
+## Hướng dẫn sử dụng.
+* Thêm 1 hoặc một số disk mới vào máy ảo.
+
+![disk](images_Linux/disk1.png)
+
+Ấn save và reboot lại máy ảo
+
+* Kiểm tra ổ disk mới đã được thêm vào hệ thống chưa với lệnh `lsblk`
+
+![disk2](images_Linux/disk2.png)
+
+ổ sdb là ổ mới được thêm vào.
+
+* Tạo và định dạng LVM cho partition trên hard disk sử dụng lệnh `fdisk /dev/sdb`
+Ấn m để xem hết tất cả các action có thể thực hiện
+
+![disk3](images_Linux/disk3.png)
+
+Tạo thêm partition mới bằng action `n`, sau đó chọn type `p` là primary, `e` là extended. Ở đây t chọn primary. Sau đó thay đổi định dạng partition bằng lệnh `fdisk /dev/sdb` sau đó chọn command `t` với đối số `8e` để định dạng ổ cứng về dạng `Linux LVM`.
+
+* Tạo không gian vật lý 
+Từ các partition đã tạo, sẽ tạo các Physical Volume trên đó bằng lệnh `pvcreate /dev/sdb1`
+
+![disk4](images_Linux/disk4.png)
+
+* Tạo Volume group
+
+Sử dụng lệnh `vgcreate <tên group> /dev/sdb1 /dev/sdc1`
+Sử dụng lệnh `vgs` hoặc `vgsdisplay` để kiểm tra lại.
+
+![disk5](images_Linux/disk5.png)
+
+* Tạo Logical Volume
+Từ một Volume Group, chúng ta có thể tạo ra các Logical Volume bằng cách sử dụng lệnh:
+
+`lvcreate -L 1G -n NewVolume volume1`
+
+![disk6](images_Linux/disk6.png)
+
+Sử dụng lệnh `lvs` hoặc `lvdisplay` để liệt kê các Logical Volume vừa tạo
+* Định dạng Logical Volume vừa tạo
+Có thể format các Logical Volume thành các định dạng như ext2, ext3, ext4, ...
+```
+mkfs.ext2 /dev/volume1/NewVolume
+mkfs.ext3 /dev/volume1/NewVolume
+mkfs.ext4 /dev/volume1/NewVolume
+```
+
+![disk7](images_Linux/disk7.png)
+
+* Mount Logical Volume
+Tạo thư mục mkdir /mnt/VolumeLogic1
+Mount Logical Volume NewVolume vào thư mục vừa tạo bằng lệnh 
+```
+mount /dev/volume1/NewVolume /mnt/VolumeLogic1
+```
+sau đó kiểm tra lại bằng lệnh `df -h`
+
+![disk8](images_Linux/disk8.png)
+
+### Thay đổi dung lượng Logical Volume của LVM
+
+Kiểm tra dung lượng 
+
+![disk9](images_Linux/disk9.png)
+
+Chung ta thấy 1 GB cho NewVolume là không đủ, và `volume1` vẫn còn nhiều dung lượng free, chúng ta có thể thay đổi dung lượng của nó bằng lệnh `lvextend -L +1GB /dev/volume1/NewVolume`
+Sau khi tăng kích thước cho Logical Volume, info đã được thay đổi nhưng filesystem chưa thay đổi. Chúng ta cần resize filesystem.
+```
+resize2fs /dev/volume1/NewVolume
+```
+
+![disk10](images_Linux/disk10.png)
+
+Còn đối với việc giảm kích thước Logical Volume
+- Trước hết cần unmount logical volume `umount /dev/volume1/NewVolume`
+- Tiến hành giảm kích thước của Logical Volume `lvreduce -L 500MB /dev/volume1/NewVolume`
+- Format lại Logical Volume `mkfs.ext3 /dev/volume1/NewVolume`
+- Mount lại Logical Volume `mount /dev/volume1/NewVolume /mnt/VolumeLogic1`
+- df -h : kiểm tra mountpoint và dung lượng của nó.
+
+![disk11](images_Linux/disk11.png)
+
+### Thay đổi dung lượng Volume Group
+Đầu tiên, chúng ta thêm một hard disk nữa vào máy ảo và reboot lại để hệ thống nhận thêm disk đó. Thao tác lại các lệnh tạo partition, tạo Physical Volume, Volume Group. 
+Sau đó sử dụng lệnh `pvscan` để xem Physical Volume nào đang rảnh.
+
+![disk12](images_Linux/disk12.png)
+
+Ta thấy Physical Volume `dev/sdc1` vừa add vào đang rảnh. Ta muốn thêm `dev/sdc1` vào Volume Group volume1 sử dụng lệnh 
+```
+vgextend /dev/volume1 /dev/sdc1
+```
+
+![disk13](images_Linux/disk13.png)
+
+### Xóa Logical Volume, Volume Group, Physical Volum
+
+* Xóa Logical Volume
+    * Trước hết phải unmount Logical Volume
+
+```
+umount /dev/volume1/NewVolume
+```
+Thực hiện xóa 
+
+Logical Volume `lvremove /dev/volume1/NewVolume`
+
+Volume Group `vgremove /dev/volume1`
+
+Physical Volume `pvremove /dev/sdc1`
