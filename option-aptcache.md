@@ -93,13 +93,13 @@ Trên Client, tải 1 gói về xem có lưu ở trên server cache không.
 
 * Cài đặt `nmap` từ máy client CentOS
 
-![nmap](images_Linux/cache1.png)
+![nmap](Linux-co-ban/images_Linux/cache1.png)
 
-![nmap1](images_Linux/cache2.png)
+![nmap1](Linux-co-ban/images_Linux/cache2.png)
 
 * Kiểm tra xem trên server có lưu cache lại các gói của Nmap không
 
-![nmap2](images_Linux/cache3.png)
+![nmap2](Linux-co-ban/images_Linux/cache3.png)
 
 Gói các gói của `nmap` sẽ được lưu trong `/var/cache/apt-cacher-ng/centos/7.6.1810/os/x86_64/Pakages` đã cấu hình `ExThreshold` trong file `acgn.conf`
 
@@ -107,11 +107,11 @@ Gói các gói của `nmap` sẽ được lưu trong `/var/cache/apt-cacher-ng/c
 
 Trên Client, xóa gói nmap đã cài đặt. Ngắt kết nối ra in ternet của máy thật để đảm bảo tất cả máy ảo đều không ra được mạng.
 
-![cache](images_Linux/th2.1.png)
+![cache](Linux-co-ban/images_Linux/th2.1.png)
 
 Vào máy client, chạy lệnh `yum install nmap` kiểm tra xem. Thấy máy client vẫn có thể cài đặt được gói `nmap` về
 
-![cache2](images_Linux/th2.2.png)
+![cache2](Linux-co-ban/images_Linux/th2.2.png)
 
 Chi tiết tham khảo
 <https://www.unix-ag.uni-kl.de/~bloch/acng/html/index.html>
