@@ -1,0 +1,35 @@
+#SELinux
+
+Viết tắt của Security-Enhanced Linux được tạo bởi NSA. Những gì SELinux làm được là khóa điều khiển truy cập vào các ứng dụng. SELinux cũng có một vài điều gây khó chịu cho người sử dụng như việc gây chậm cho hệ thống hay khiến cho một vài ứng dụng trở nên khó cài đặt. Nhưng những tiện lợi về bảo mật khi sử dụng SELinux (hoặc Apparmor) vượt trội hơn so với những nhược điểm mà nó có. Bạn có thể kích hoạt SELinux trong quá trình cài đặt hệ điều hành Linux.
+SElinux còn được nhúng vào hệ điều hành Android để các tài khoản thực hiện đúng chức năng và nhiệm vụ của mình, thay vì hacker có thể chiếm quyền kiểm soát của hệ thống từ một User. Đây là cách đơn giản nhất nhằm tăng tính bảo mật cho cả một hệ thống.
+
+![SElinux](images_Linux/SElinux.png)
+
+## SELinux Modes
+
+SELinux có 3 chế độ hoạt động cơ bản, trong đó Enforcing là chế độ mặc định khi cài đặt. Tuy nhiên, có một bộ định tính bổ sung của các mục tiêu hoặc các ml kiểm soát cách các quy tắc SELinux phổ biến được áp dụng, với mục tiêu là mức độ ít nghiêm ngặt hơn.
+
+* Enforcing: Chế độ mặc định sẽ cho phép và thực thi chính sách bảo mật SELinux trên hệ thống, từ chối các hành động truy cập và ghi nhật ký
+* Permissive: Trong chế độ Permissive, SELinux được kích hoạt nhưng sẽ không thực thi chính sách bảo mật, chỉ cảnh báo và ghi lại các hành động. Chế độ Permissive hữu ích cho việc khắc phục sự cố SELinux
+* Disabled: SELinux bị vô hiệu hóa hoặc bị tắt đi.
+
+## Cách vô hiệu hóa
+
+* Vô hiệu hóa tạm thời
+
+```
+# echo 0 > /selinux/enforce
+or
+# setenforce 0
+```
+Quay trở lại trạng thái chưa bị vô hiệu hóa
+```
+echo 1 > /selinux/eforce
+or
+setenforce 1
+```
+
+* Vô hiệu hóa vĩnh viễn 
+
+Chọn sửa thành disable trong file `/etc/selinux/config`
+Thay `SELINUX=disable`

@@ -1,0 +1,9 @@
+# Bash Shell
+
+* SHELL (hệ vỏ) là một interface nằm giữa OS Kernel và người dùng, nó cung cấp môi trường để người dùng thao tác với Kernel. Các chương trình Shell sẽ làm nhiệm vụ thông dịch (interpret) các lệnh của người dùng sang chương trình có sẵn trên hệ thống từ đó thực thi các chức năng tương ứng. Các lệnh này người dùng có thể nhập trực tiếp qua chế độ tương tác (interactive) hoặc thông qua dạng script. Các Shell script sẽ được thông dịch (chứ không phải biên dịch - compile).
+* BASH (Bourne Again Shell) thuộc nhóm Bourne Shell được viết bởi Brian Fox trong khuôn khổ một dự án của GNU cho việc thay thế sh.
+Trên các hệ thống thì `/bin/sh` sẽ được symbolic link tới bash (có một số hệ thống như Ubuntu, Debian thì link tới dash (Debian AllShell), một dạng shell rút gọn, nhỏ cho thao tác non-interactive nhanh hơn)
+
+![bash](images_Linux/bash.png)
+
+## Các lệnh cơ bản với Bash

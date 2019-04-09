@@ -101,7 +101,7 @@ Trên Client, tải 1 gói về xem có lưu ở trên server cache không.
 
 ![nmap2](Linux-co-ban/images_Linux/cache3.png)
 
-Gói các gói của `nmap` sẽ được lưu trong `/var/cache/apt-cacher-ng/centos/7.6.1810/os/x86_64/Pakages` đã cấu hình `ExThreshold` trong file `acgn.conf`
+Gói các gói của `nmap` sẽ được lưu trong `/var/cache/apt-cacher-ng/centos/7.6.1810/os/x86_64/Pakages` đã cấu hình `ExThreshold` trong file `acgn.conf` để set thời gian lưu đối với các thư mục tải về.
 
 ### Trường hợp 2
 
