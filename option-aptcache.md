@@ -63,7 +63,7 @@ Offlinemode: 0
 ```
 ForceManaged: 0
 ```
-* Ngay trước khi xem xét một tập tin không được ước tính đã hết hạn (sẽ bị xóa). Nếu gía trị được đặt quá thấp và các tệp chỉ mục cụ thể không khả dụng trong một số ngày thì có nguy cơ loại bỏ các tệp gói vẫn hữu ích. (đặt ngày xóa cache)
+* Ngay trước khi xem xét một tập tin không được ước tính đã hết hạn (sẽ bị xóa). Nếu gía trị được đặt quá thấp và các tệp chỉ mục cụ thể không khả dụng trong một số ngày thì có nguy cơ loại bỏ các tệp gói vẫn hữu ích.
 ```
 ExThrehold: 4
 ```
@@ -81,6 +81,26 @@ LocalDirs: acng-doc /usr/share/doc/apt-cacher-ng
 ```
 * Tìm thấy các tệp gói không còn được liệt kê trong bất kề tệp chỉ mục nào và loại bỏ chúng sau một thời gian an toàn. Tùy chọn này cho phép giữ nhiều phiên bản của gói trong bộ đệm sau khi hết thời gian an toàn.
 
+```
+KeepExtraVersions: 0
+```
+## Một số cấu hình thao tác trên giao diện
+
+* Expiration
+
+Các thông số của Expiration
+
+- `Ignore the threshold that aborts early when there is probably not much to do` : 
+- `Skip header checks (faster, not detecting bad metadata) ` : Theo mặc định, tệp mô tả tiêu đề của mọi gói được mở và kiểm tra dữ liệu xấu và cho sự không nhất quán rõ ràng (như tệp cục bộ lớn hơn quy định của máy chủ). Điều đó có nghĩa là mở việc đọc một vài kilobyte từ đĩa cho hầu hết mọi tệp trong bộ đệm và làm giảm hiệu suất của quá trình. Tùy chọn này bỏ qua kiểm tra cơ bản.
+- `Validate by file name AND file directory` : Kiểm tra kích thước tệp và nội dung khi có thể đối với siêu dữ liệu trong các tệp chỉ mục. Lưu ý: các cuộc gọi trong quá trình hết hạn trong tương lai mà không có tùy chọn này sẽ loại bỏ kết quả kiểm tra này và quên đi các tệp bị hỏng. Do đó, một hành động trên các tệp này cần phải được thực hiện càng sớm càng tốt, như cắt bớt chúng (xem bên dưới) hoặc xóa thông qua thao tác xóa (sử dụng hộp kiểm và nút Xóa, xem đầu ra của quá trình) hoặc thông qua thao tác "Xóa tất cả các tệp không được kiểm tra" trang điều khiển chính.
+- `then validate file contents through checksum (SLOW), also detecting corrupt files,`
+- `then truncate damaged files immediately`
+- `Treat incomplete files as damaged.`
+- `Purge unreferenced files immediately after scan`
+
+
+## Kho lưu trữ
+Các link kho lưu trữ được lưu ở trong thư mục `/etc/apt-cache-ng` gồm `centos_mirrors`, `backends_debian`, `backends_ubuntu`
 ## Lab
 
 <https://github.com/thaonguyenvan/meditech-thuctap/blob/master/ThaoNV/ghichep-localrepo/ghichep-apt-cacher-ng.md>
