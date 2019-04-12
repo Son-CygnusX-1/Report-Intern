@@ -4,9 +4,11 @@
 Quản lý khối lượng hợp lý, là công nghệ quản lý thiết bị lưu trữ cung cấp cho người dùng sức mạnh để nhóm và trừu tượng bố cục vật lý của thiết bị lưu trữ thành phần để quản trị dễ dàng và linh hoạt hơn. Bằng cách sử dụng khung công tác nhân Linux của trình ánh xạ thiết bị, phép lặp hiện tại, LVM2, có thể được sử dụng để thu thập các thiết bị lưu trữ hiện có thành các nhóm và phân bổ các đơn vị logic từ không gian kết hợp khi cần thiết.
 * LVM: là phương pháp cho phép ấn định không gian đĩa cứng thành những logical Volume khiến cho việc thay đổi kích thước trở nên dễ dàng hơn (so với partition). Với kỹ thuật LVM bạn có thể thay đổi kích thước mà không cần sửa lại table của OS. Điều này thật hữu ích với những trường hợp sử dụng hết bộ nhớ còn trống của partition và muốn mở rộng dung lượng của nó.
 * Vai trò: 
-    - Không để hệ thống bị gián đoạn
-    - Không làm hỏng dịch vụ
-    - Có thể kết hợp Hot Swapping
+
+- Không để hệ thống bị gián đoạn
+- Không làm hỏng dịch vụ
+- Có thể kết hợp Hot Swapping
+
 * Thành phần trong LVM
 
 Mô hình
@@ -14,28 +16,39 @@ Mô hình
 ![LVM1](images_Linux/LVM1.png)
 
 **Hard drives - Drives**
+
 Thiết bị lưu trữ dữ liệu, ví dụ là `/dev/sda` , `dev/sdb`,...
+
 **Partition**
+
 Partition là các phân vùng của Hard drives, mỗi Hard drives có 4 partition, trong đó partition có 2 loại
-    - Primary partition: Phân vùng chính, có thể khởi động, mỗi ổ cứng có thể có tối đa 4 phân vùng này.
-    - Extended partition: phân vùng mở rộng, có thể tao những vùng luân lý.
+
+- Primary partition: Phân vùng chính, có thể khởi động, mỗi ổ cứng có thể có tối đa 4 phân vùng này.
+
+- Extended partition: phân vùng mở rộng, có thể tao những vùng luân lý.
+
 **Physical Volumes**
 Là một gói khác của partition trong kỹ thuật LVM, nó là những thành phần cơ bản được sử dụng bởi LVM. Một Physical Volume không thể mở rộng ra ngoài phạm vi một ổ đĩa.
 Có thể kết hợp nhiều Physical Volume thành Volume Groups
 
 **Volume Group**
+
 Nhiều Physical Volume trên những ổ đĩa khác nhau được kết hợp lại thành một Volume Group. Volume group có thể tạo ra các Logical Volume, trong đó người ta có thể tạo, thay đổi kích thước, lưu trữ, gỡ bỏ và sử dụng.
+
 *Lưu ý: Boot loader không thể đọc /boot khi nó nằm trên Logical Volume Group. Do đó không thể sử dụng kỹ thuật LVM với /boot mount point*
 
 **Logical Volume**
+
 Volume Group được chia nhỏ thành nhiều Logical Volume, mỗi Logical Volume có ý nghĩa tương tự như partition. Nó được dùng cho các mount point và được format với những định dạng khác nhau như ext2, ext3, ext4,…
+
 Khi dung lượng của Logical Volume được sử dụng hết ta có thể đưa thêm ổ đĩa mới bổ sung cho Volume Group và do đó tăng được dung lượng của Logical Volume
 
 **File Systems**
-    - Tổ chức và kiểm soát các tập tin
-    - Được lưu trữ trên ổ đĩa cho phép truy cập nhanh chóng và an toàn
-    - Sắp xếp dữ liệu trên đĩa cứng máy tính
-    - Quản lý vị trí vật lý của mọi thành phần dữ liệu
+
+- Tổ chức và kiểm soát các tập tin
+- Được lưu trữ trên ổ đĩa cho phép truy cập nhanh chóng và an toàn
+- Sắp xếp dữ liệu trên đĩa cứng máy tính
+- Quản lý vị trí vật lý của mọi thành phần dữ liệu
 
 ## Hướng dẫn sử dụng.
 ### Thêm Disk
@@ -167,3 +180,113 @@ Physical Volume `pvremove /dev/sdc1`
 `mkdir <Thư mục>` : Tạo thư mục để mount vào
 
 `mount /dev/<Volume Group>/<Logical Volume> <Thư mục>` : Mount vào thư mục vừa tạo
+
+## LVM Thin Provisioning
+
+Là tính năng cấp pháp ổ cứng dựa trên sự linh hoạt của LVM. Giả sử ta có một **Volume Group** ta sẽ tạo một **Thin Pool* vừa VG này với dung lượng 20GB cho nhiều khách hàng sử dụng. Giả sử ta có 3 khách hàng, mỗi khách hàng được cấp 6GB lưu trữ. Như vậy ta có 18Gb. Với kỹ thuật truyền thống thì t chỉ có thể cấp phát 2GB cho ng thứ 4.
+Nhưng với Thin Provisioning ta vẫn có thể cấp thêm 6Gb nữa cho khách hàng thứ 4. Tức là 6x4=24Gb lớn hơn 4Gb ban đầu. Sở dĩ ta làm được như vậy là do mỗi user tuy được cấp 6Gb nhưng thường thì họ sẽ không dùng hết dung lượng này (nếu hết thì sẽ là Over Provisioning). Nhưng thực tế là khi người dùng sử dụng đến đâu, hệ thống sẽ cấp phát thêm dung lượng đến đó.
+Đối với cơ chế cấp phát bình thường thì LVM sẽ cấp phát 1 dãy block liên tục mỗi khi người dùng tạo ra 1 volume mới. Nhưng với cơ chế thin pool thì LVM chỉ cấp phát các block ổ cứng (tập hợp các con trỏ, trỏ tới ổ cứng)khi có dữ liệu thật sự ghi xuống đó. Cách tiếp cận này giúp tiết kiệm dung lượng cho hệ thống, tận dụng tối ưu dung lượng lưu trữ. Tuy nhiên, khuyết điểm là có thể gây phân mảnh hệ thống và gây ra tình trạng Over Provisioning.
+
+* Cách thực hiện
+
+- Tạo Virtual Volume từ các ổ disk
+- Tạo Thin Pool (Thực chất là tạo Logical Volume với cờ --thinpool)
+- Tạo các Thin Volume (Thực chất là Logical Volume): gồm tạo **filesystem** và **mount point**
+- Mở rộng Thin Pool.
+
+Thực hiện
+
+*Tạo Virtual Volume*
+```
+vgcreate ThaiSonGroup /dev/sdb /dev/sdc
+pvg #kiem tra lai volume group
+vgs #kiem tra lai volume group
+```
+
+*Tạo Thin Pool*
+```
+lvcreate -l 10G --thinpool "ThaiSonPool" ThaiSonGroup
+lvs #kiem tra lai
+lvdisplay #kiem tra lai
+```
+
+*Tạo các Thin Volumes*
+```
+lvcreate -V 3G --thin -n "Thin_son1" ThaiSonGroup/ThaiSonPool
+lvcreate -V 3G --thin -n "Thin_son2" ThaiSonGroup/ThaiSonPool
+lvcreate -V 3G --thin -n "Thin_son3" ThaiSonGroup/ThaiSonPool
+lvcreate -V 3G --thin -n "Thin_son4" ThaiSonGroup/ThaiSonPool
+```
+xuất hiện cảnh bảo khi tổng Thin Volume tạo ra nhiều hơn tổng dung lượng của Thin Pool.
+
+*Format 4 volume về định dạng ext4*
+```
+mkfs.ext4 /dev/ThaiSonGroup/Thin_son1
+mkfs.ext4 /dev/ThaiSonGroup/Thin_son2
+mkfs.ext4 /dev/ThaiSonGroup/Thin_son3
+mkfs.ext4 /dev/ThaiSonGroup/Thin_son4
+```
+
+*Tạo mount point và mount 4 volume vào hệ thống*
+```
+mkdir -p /mnt/{Thaison1,Thaison2,Thaison3,Thaison4}
+mount /dev/ThaiSonGroup/Thin_son1 /mnt/Thaison1
+mount /dev/ThaiSonGroup/Thin_son2 /mnt/Thaison2
+mount /dev/ThaiSonGroup/Thin_son3 /mnt/Thaison3
+mount /dev/ThaiSonGroup/Thin_son4 /mnt/Thaison4
+df -h
+```
+
+Tham khảm
+<https://cloudcraft.info/gioi-thieu-ve-lvm-logical-volume-management/>
+
+## Snapshot LVM
+Snapshot LVM là bản sao không gian khả dụng của volume lvm. Nó chỉ hoạt động với LVM và chỉ tiêu thụ dung lượng khi thay đổi được thực hiện đối với không gian logic nguồn thành không gian snapshot. Nếu source volume có một thay đổi lớn được thực hiện với tổng 1GB thì các thay đổi tương tự sẽ được thực hiện  đối với volume snapshot. Trong trường hợp snapshot hết dung lượng, chúng ta có thể sử dụng `lvextend` để phát triển. Và nếu chúng ta cần thu nhỏ snapshot, chúng ta có thể sử dụng `lvreduce`
+Nếu vô tình xóa bất cứ tệp nào sau khi tạo Snapshot, ta sẽ không phải lo lắng vì snapshot có tệp gốc ta đã xóa. Snapshot được sử dụng đẻ thực hiện khôi phục nhanh.
+Snapshot không thể được sử dụng cho tùy chọn backup. Backup là bản sao chính của một số dữ liệu, vì vậy không thể sử dụng snapshot làm tùy chọn sao lưu.
+
+* Tạo Snapshot
+```
+lvcreate -L 1GB -s -n <namefilesnapshot> /dev/<volume group>/<không gian cần snapshot>
+```
+Với các đối số 
+
+`1GB` Kích thước snapshot
+
+`-s` tạo snapshot
+
+`-n` tạo tên
+
+Xóa snapshot
+```
+lvremove /dev/<volume group>/<không gian snapshot>
+```
+
+Kiểm tra lại
+```
+lvs
+```
+
+* Mở rộng
+Khi chúng ta cần mở rộng kích thước snapshot trước khi tràn, chúng ta có thể thực hiện bằng cách
+```
+lvextend -L + 1G / dev /<volume group>/<không gian snapshot>
+```
+* Khôi phục snapshot hoặc sáp nhập
+
+```
+ unmount / mnt / <logical volume> /
+```
+
+Khôi phục snap bằng lệnh
+```
+lvconvert --merge / dev / <volume group> / <logical volume>
+```
+
+Sau khi hợp nhất, khối lượng snapshot sẽ tự động bị xóa.
+
+**chú ý** Để mở rộng snapshot tự động, chúng ta có thể thực hiện bằng cách sử dụng sửa đổi trong tệp conf. 
+```
+vi /etc/lvm/lvm.conf
+```
+Tìm kiếm `autoextend`, xuất hiện 2 tham chiếu là `autoextend_threshold` và `autoextend_percent`. Với threshold là ngưỡng mở rộng khi snapshot đạt được bao nhiêu phần trăm (mặc định là 100%). Và `percent` là kích thước sẽ mở rộng thêm (mặc định là mở thêm 20% kích thước).

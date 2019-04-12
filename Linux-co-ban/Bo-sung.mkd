@@ -1,0 +1,147 @@
+# Bổ sung kiến thức
+
+## history 
+
+Show các lệnh đã từng sử dụng
+Muốn xem thông tin xem thông tin lịch sử được lưu ở đâu
+```
+$ echo $HISTFILE
+```
+Muốn xem size lịch sử số lượng command lưu
+```
+$ echo $HISTSIZE
+```
+Để cấu hình hiện thêm thông tin trong history, 
+```
+ echo export HISTTIMEFORMAT=\"%m/%d/%y %T \" >> ~/.bash_profile
+```
+Với các tham số
+```
+y	year in 2-digit format
+Y	year in 4-digit format
+m	month in 2-digit format
+d	day in 2-digit format
+T	time in 24-hour format
+%r	date in 12 hour AM/PM format
+%D	date in mm/dd/yy format
+```
+
+## Process
+
+* Sự khác nhau giữa 2 loại tiến trình 
+
+- Foreground là bất kỳ lệnh hoặc tác vụ nào bạn chạy trực tiếp và chờ cho nó hoàn thành. Một số quy trình nền trước hiển thị trước một số loại giao diện người dùng hỗ trợ tương tác người dùng đang diễn ra, trong khi các quy trình khác thực thi một tác vụ và "đóng băng" máy tình trong khi nó hoàn thành nhiệm vụ đó.
+- Background không giống như Foreground, shell không phải đợi quá trình nền kết thúc trước khi nó có thể chạy nhiều tiến trình hơn. Trong giới hạn dung lượng bộ nhớ khả dụng, bạn có thể nhập nhiều lệnh nền lần lượt. Khi đưa ra lệnh, trình bao sẽ thực thi công việc, nhưng thay vì đợi lệnh kết thúc, bạn sẽ ngay lập tức được trả về trình bao để có thể nhập các lệnh khác.
+
+Chuyển đổi giữa các tiến trình
+
+* Kill
+
+```
+kill -0 <PID>
+```
+Câu lệnh này giúp kiểm tra xem bạn có quyền thực hiện kill trên tiến trình đó không.
+
+* top
+
+Giải thích các tham số:
+Load avenger: Là tải hệ thống trung bình được tính trong một khoảng thời gian nhất định là 1, 5 và 15 phút. Là trung bình các tiến trình đang chạy trong hàng đợi thực thi (kernel) được gắn thẻ.
+
+%Cpu(s):  0,0 us,  0,0 sy,  0,0 ni,100,0 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+
+```
+us - Thời gian dành cho không gian người dùng
+sy - Thời gian dành cho không gian kernel
+ni - Thời gian dành cho việc chạy các quy trình người dùng được tạo ra (Ưu tiên do người dùng xác định)
+id - Thời gian dành cho các hoạt động nhàn rỗi
+wa - Thời gian dành cho việc chờ đợi trên các thiết bị ngoại vi IO (ví dụ: đĩa)
+hi - Thời gian dành cho việc xử lý các thói quen ngắt phần cứng. (Bất cứ khi nào một đơn vị ngoại vi muốn sự chú ý hình thành CPU, nó thực sự kéo một dòng, để báo hiệu cho CPU phục vụ nó)
+si - Thời gian dành cho việc xử lý các phần mềm gián đoạn thường xuyên. (một đoạn mã, gọi một thói quen ngắt ...)
+st - Thời gian dành cho sự chờ đợi không tự nguyện của cpu ảo trong khi hypanneror đang phục vụ một bộ xử lý khác (bị đánh cắp từ một máy ảo)
+
+```
+
+## Crontab
+
+Cron là những tiện ích giúp lập lịch chạy những dòng lệnh bên phía server để thực thi một hoặc nhiều công việc nào đó mà theo thời gian được lập sẵn. Một số người gọi những công việc đó là Cron job hay Cron task
+Cron là một chương trình deamon, tức là nó được chạy ngầm mãi mãi một khi nó khởi động lên. Như các deamon khác thì bạn cần khởi động lại nó nếu như có thay đổi thiết lập gì đó. Chương trình này nhìn vào file thiết lập có tên crontab để thực thi những task được mô tả ở bên trong.
+
+* Cách làm việc
+
+Một cron schedule đơn giản là một text file. Mỗi người dùng có một cron schedule riêng, file này thường nằm ở `/var/spool/cron`. Hoặc bạn có thể chỉnh sửa trực tiếp trong file `/etc/crontab`
+Một số lệnh thường dùng:
+- `crontab -e` tạo hoặc chỉnh sửa file crontab
+- `crontab -l` hiển thị file crontab
+- `crontab -r` xóa file crontab
+
+* Lab cron
+
+`* * * * * /usr/bin/date >> /root/cron.log 2>&1`
+
+
+Ví dụ: Trường đầu tiên gồm các dấu `*` thể hiện thời gian chạy cron. Với trình tự là `phút giờ Ngày Tháng Thứ` Tất cả dấu `*` thể hiện Every minute.
+Sử dụng lệnh `crontab -l` để kiểm tra lệnh.
+Sử dụng lệnh `crontab -e` để sửa lệnh.
+Sử dụng lệnh `crontab -r` để xóa nội dung.
+
+![cron](images_Linux/cron.png)
+## SSH
+
+SSH hay Secure Shell, là một giao thức điều khiển từ xa cho phép người dùng kiểm soát và chỉnh sửa server qua mạng. Dịch vụ được tạo ra nhằm thay tế telnet vốn không có mã hóa và sử dụng kỹ thuật cryptograpphic để đảm bảo tất cả các giao tiếp gửi tới và gửi từ server từ xa diễn ra trong tình trạng mã hóa. Nó cung cấp thuật toán để chứng thực người dùng từ xa, chuyển input từ client tới host, và relay kết quả trả về tới khách hàng.
+
+Hình bên dưới thể hiện mội giao diện Windows SSH điển hình. Bất kể user Linux hoặc MacOS vào cũng đều có thể SSH tới server từ xa trực tiếp từ cửa sổ terninal. Windows users có thể sử dụng những SSH clients như Putty. 
+
+* SSH hoạt động như thế nào
+
+```
+ssh {user}@{host}
+```
+ssh key command cho hệ thống biết là bạn muốn mở một kết nối được mã hóa Secure Shell Connection. **{user}** đại diện cho tài khoản người dùng bạn muốn dùng để truy cập. **{host}** đại diện cho máy tính bạn muốn truy cập. Nó có thể là 1 địa chỉ IP hoặc tên miền.
+
+* Kỹ thuật mã hóa
+
+- Mã khóa đối xứng
+- Mã khóa công khai
+- Mã khóa hàm băm
+
+* SSH xử lý như thế nào với những kỹ thuật này
+
+SSH hoạt động bằng mô hình client-server cho phép chứng thực an toàn giữa 2 máy từ xa và mã hóa dữ liệu được truyền qua chúng.
+SSH vận hành trên TCP port 22 (mặc định, có thể thay đổi nếu cần). Host (server) nghe port 22(hoặc bất kỳ port nào ssh gán vào) cho những kết nối tới. Nó sẽ thiết lập kết nối an toàn khi chứng thực giữa client và môi trường shell đang mở thành công.
+
+* ssh key
+
+KHóa ssh cung cấp một cách an toàn hơn để đăng nhập vào máy chủ bằng SSH so với chỉ sử dụng mật khẩu. Các khóa SSH gần như không thể giải mã bằng cách "vũ lực"
+
+Cách tạo:
+- bước 1: Tạo cặp khóa trên máy khách
+```
+ssh-keygen -t rsa
+```
+- bước 2: Lưu trữ khóa và cụm mật khẩu
+Khi bạn đã nhập lệnh Gen Key, bạn sẽ nhận được một vài câu hỏi nữa:
+```
+Enter file in which to save the key (/home/demo/.ssh/id_rsa):
+```
+- Bước 3: Sao chép khóa công khai
+Khi cặp khóa được tạo, đã đến lúc đặt khóa chung trên máy chủ mà chúng tôi muốn sử dụng.
+
+Bạn có thể sao chép khóa chung vào tệp ủy quyền của máy mới bằng lệnh ssh-copy-id. Đảm bảo thay thế tên người dùng và địa chỉ IP bên dưới.
+```
+ssh-copy-id demo@198.51.100.0
+```
+- Bước 4: Vô hiệu hóa mật khẩu để đăng nhập root
+Mở file cấu hình SSH
+```
+vi /etc/ssh/sshd_config
+```
+Sửa đổi đối số `PermitRootLogin` sau đó reload lại service để có hiệu lực `systemctl reload sshd.service`
+
+Link tham khảo:
+<https://www.hostinger.vn/huong-dan/ssh-la-gi-va-cach-su-dung-ssh-cho-nguoi-moi-bat-dau/>
+
+## Shell, environment 
+`~` Mở rộng đến thư mục chính của bạn. Nếu hiện tại người dùng là `user`, kết quả sẽ là `/home/user/.bash_profile)
+## tty
+
+tty là viết tắt của teletype, phổ biến hơi với ý nghĩa là thiết bị đầu cuối. Cơ bản, đây là một thiết bị (triển khai trong phần mềm) cho phép bạn tương tác  với hệ thống bằng cách truyền dữ liệu (bạn nhập) vào hệ thống và hiển thị đầu ra do hệ thống tạo ra.
