@@ -165,6 +165,8 @@ Physical Volume `pvremove /dev/sdc1`
 
 ### Tóm tắt các bước tạo
 
+Người quản trị dùng LVM để kết hợp các Physical Volumes thành các Volume Groups để thống nhất không gian lưu trữ có sẵn trên hệ thống. Sau đó, quản trị viên có thể phân Volume Groups thành các Logical Volumes tùy ý, hoạt động như các phân vùng.
+
 `fdisk /dev/sdb` : Tạo Partition
 
 `fdisk /dev/sdb` : Chọn định dạng

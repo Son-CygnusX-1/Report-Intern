@@ -142,6 +142,13 @@ Link tham khảo:
 
 ## Shell, environment 
 `~` Mở rộng đến thư mục chính của bạn. Nếu hiện tại người dùng là `user`, kết quả sẽ là `/home/user/.bash_profile)
+
+$BASH là một biến cục bộ, chỉ hợp lệ trong trình bao (bash) hiện tại.
 ## tty
 
 tty là viết tắt của teletype, phổ biến hơi với ý nghĩa là thiết bị đầu cuối. Cơ bản, đây là một thiết bị (triển khai trong phần mềm) cho phép bạn tương tác  với hệ thống bằng cách truyền dữ liệu (bạn nhập) vào hệ thống và hiển thị đầu ra do hệ thống tạo ra.
+Đơn giản có thể phân biệt:
+* Terminal = tty = môi trường nhập/xuất văn bản
+* Console = thiết bị đầu cuối vật lý
+* Shell = Trình thông dịch dòng lệnh.
+
