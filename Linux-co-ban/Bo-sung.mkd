@@ -33,7 +33,16 @@ T	time in 24-hour format
 - Foreground là bất kỳ lệnh hoặc tác vụ nào bạn chạy trực tiếp và chờ cho nó hoàn thành. Một số quy trình nền trước hiển thị trước một số loại giao diện người dùng hỗ trợ tương tác người dùng đang diễn ra, trong khi các quy trình khác thực thi một tác vụ và "đóng băng" máy tình trong khi nó hoàn thành nhiệm vụ đó.
 - Background không giống như Foreground, shell không phải đợi quá trình nền kết thúc trước khi nó có thể chạy nhiều tiến trình hơn. Trong giới hạn dung lượng bộ nhớ khả dụng, bạn có thể nhập nhiều lệnh nền lần lượt. Khi đưa ra lệnh, trình bao sẽ thực thi công việc, nhưng thay vì đợi lệnh kết thúc, bạn sẽ ngay lập tức được trả về trình bao để có thể nhập các lệnh khác.
 
+*Chú ý* Thêm dấu & để chạy Foreground
+Kết thúc bằng `Ctrl C` or dừng bằng `Ctrl Z`
+
 Chuyển đổi giữa các tiến trình
+
+Dùng lệnh `fg <number>` để trả lệnh Foreground vừa dừng (number để hiện số lệnh,muốn show hết thì k cần number).
+
+Nếu muốn chương trình tiếp tục chạy nhưng không phải kiểm soát nó nữa `bg`
+Để xem danh sách các chương trình bạn đang chạy hoặc đã tạm dừng, bạn có thể sử dụng lệnh jobs:
+`jobs -l` show 
 
 * Kill
 
