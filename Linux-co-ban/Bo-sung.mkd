@@ -163,27 +163,49 @@ tty là viết tắt của teletype, phổ biến hơi với ý nghĩa là thi�
 * Shell = Trình thông dịch dòng lệnh.
 
 ## Một số command khác
-Show bảng định tuyến
+* Show bảng định tuyến
 ```
 netstat -rn
 ```
-In các biến môi trường
+* In các biến môi trường
 ```
 printenv
 ```
-Xóa thư mục rỗng
+* Xóa thư mục rỗng
 ```
 rmdir <dir>
 ```
-Nén 1 file
+* Nén 1 file
 ```
 tar czf <dirname>.tgz <dirname>
 ```
-giải nén
+* giải nén
 ```
 tar xzvf <file>
 ```
-Hiển thị trạng thái file
+* Hiển thị trạng thái file
 ```
 stat <file>
+```
+* Chạy nhiều lệnh lần lượt
+```
+command_1; command_2; command_3
+```
+* Chạy nhiều lệnh trong một lệnh
+```
+command_1 && command_2
+```
+* Tìm kiếm và sử dụng các lệnh đã sử dụng
+`ctrl+r`
+* Đóng băng terminal `Ctrl S` Để sử dụng lại `Ctrl Q`
+* Di chuyển đầu dòng `Ctrl A` di chuyển cuối dòng `Ctrl E`
+* Sử dụng `!$` để đi vào thư mục trước đó
+* Sử dụng lại lệnh trước đó dùng `!!`
+```
+apt install <pakage>
+sudo !!
+```
+* Làm trống tệp mà k xóa
+```
+> filename
 ```
