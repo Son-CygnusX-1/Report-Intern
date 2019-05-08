@@ -4,6 +4,7 @@
 
 Show các lệnh đã từng sử dụng
 Muốn xem thông tin xem thông tin lịch sử được lưu ở đâu
+
 ```
 $ echo $HISTFILE
 ```
@@ -161,3 +162,28 @@ tty là viết tắt của teletype, phổ biến hơi với ý nghĩa là thi�
 * Console = thiết bị đầu cuối vật lý
 * Shell = Trình thông dịch dòng lệnh.
 
+## Một số command khác
+Show bảng định tuyến
+```
+netstat -rn
+```
+In các biến môi trường
+```
+printenv
+```
+Xóa thư mục rỗng
+```
+rmdir <dir>
+```
+Nén 1 file
+```
+tar czf <dirname>.tgz <dirname>
+```
+giải nén
+```
+tar xzvf <file>
+```
+Hiển thị trạng thái file
+```
+stat <file>
+```
