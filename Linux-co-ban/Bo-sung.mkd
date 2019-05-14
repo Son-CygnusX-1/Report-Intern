@@ -209,3 +209,7 @@ sudo !!
 ```
 > filename
 ```
+* Đếm số dòng trong file
+```
+wc -l file
+```

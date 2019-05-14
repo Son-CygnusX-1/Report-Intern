@@ -68,13 +68,19 @@ Quá trình lấy địa chỉ IP từ DHCP server được chia thành 4 bướ
 * Bước 3: Máy trạm gửi bản tin chấp nhận những thông tin máy chủ gửi hoặc gửi bản tin yêu cầu máy chủ cấp cho địa chỉ IP ưa thích của máy trạm.
 * Bước 4: Máy chủ nếu nhận được thông tin chấp nhận sẽ gửi bản tin Ack. Nếu nhận được bản tin yêu cầu cấp IP và IP đó chưa được sử dụng sẽ gửi lại bản tin DHCP Pack, còn nếu IP đó đã được sử dụng sẽ gửi lại bản tin NAck.
 
+Theo tiêu chuẩn DHCP, RFC 2131 , máy khách DHCP không chờ hợp đồng thuê hết hạn, vì nó có nguy cơ nhận địa chỉ mới được gán cho nó. Thay vào đó, khi máy khách DHCP đạt đến nửa điểm trong thời gian thuê, nó sẽ cố gắng gia hạn hợp đồng thuê để giữ lại cùng một địa chỉ IP. Do đó, thời gian thuê giống như một cửa sổ trượt.
+Thông thường nếu một địa chỉ IP được gán cho một thiết bị, thiết bị đó sau đó đã bị ngắt mạng và hợp đồng thuê của nó không được gia hạn, máy chủ DHCP sẽ cho phép hết hợp đồng thuê đó. Bởi vì máy khách đã rời khỏi mạng và không còn cần địa chỉ nữa, nên thời gian thuê trong máy chủ đã đạt được và hợp đồng thuê ở trạng thái Đã hết hạn.
+
+Nhưng nếu nhóm địa chỉ hết địa chỉ, máy chủ sẽ phân bổ lại địa chỉ đã hết hạn này trước khi hết giờ hẹn giờ giữ. Địa chỉ hết hạn sẽ bị xóa tự động vì hệ thống cần nhiều địa chỉ hơn hoặc khi bộ đếm thời gian giữ giải phóng chúng. File lease đc lưu tại ` /var/lib/dhcpd/dhcpd.lease`
+
+<https://docs.paloaltonetworks.com/pan-os/8-0/pan-os-admin/networking/dhcp/dhcp-addressing/dhcp-leases.html#>
+
 ### Mô tả quá trình lấy IP với máy trạm lần đầu kết nối đến DHCP server
 Quá trình lấy địa chỉ IP của máy trạm được mô tả như sau:
 
 * Máy trạm khởi động với "IP rỗng" cho phép liên lạc với DHCP bằng giao thức UDP. Nó chuẩn bị một thông điệp (DHCP Discover) chứa địa chỉ MAC, tên máy tính.
-Thông điệp DHCP Discover có IP nguồn: 0.0.0.0;
-IP đích: 255.255.255.255; IP đã từng dùng
-
+Thông điệp DHCP Discover sử dụng địa chỉ MAC để gửi tin; IP đã từng dùng
+Sau 4 lần truy vấn không thành công nó sẽ sinh ra 1 địa chỉ IP riêng cho chính mình nằm trong dãy 169.254.0.0 đến 169.254.255.255
 *DHCP Discover*
 ```
 IP: ID = 0x0; Proto = UDP; Len: 328
@@ -431,12 +437,6 @@ DHCP: Discover           (xid=3ED14752)
         DHCP: Parameter Request List = (Length: 7) 01 0f 03 2c 2e 2f 06
         DHCP: End of this option field
 ```
-
-## Giải quyết tình huống
-
-* Câu hỏi đặt ra: DHCP server full slot cho IP khả dụng, nhưng thực tế là không có người dùng nào đang sử dụng, IP đã được đặt chỗ và không thể sử dụng cho người khác mặc dù hiện tại người dùng (tất cả người dùng) đó đang ngắt kết nối.
-
-Trong tình huống này, DHCP server không thể tự động cấp pháp IP cho máy trạm được, vì cơ chế của DHCP server không cho phép. Để máy mới có thể xin đcủ IP, người quản trị phải xen vào hệ thống DHCP server và tác động vào để giúp cho máy trạm có thể lấy được IP từ máy chủ DHCP.
 
 ## Tổng kết
 
