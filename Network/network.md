@@ -1,6 +1,6 @@
 ## Netstat
 ```
-yum install netstat
+yum install nettools
 ```
 Các command
 * Liệt kê tất cả các cổng kết nối TCP và UDP
