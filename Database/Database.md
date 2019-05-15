@@ -189,9 +189,9 @@ Sử dụng máy khách `mysql` để import vào cơ sở dữ liệu mới
 * Khái niệm 
 DBMS có thể hiểu là hệ thống được thiết kế để quản lý một khối lượng dữ liệu nhất định với một cách tự động và có trật tự. Các hành động quản lý này bao gồm chỉnh sửa, xóa, lưu thông tin và tìm kiếm trong một nhóm dữ liệu nhất định.
 * Vai trò
-- Cung cấp môi trường tạo lập cơ sở dữ liệu
-- Cung cấp cách cập nhật và khai thác dữ liệu
-- Cung cấp các công cụ kiểm soát, điều khiển các truy cập vào cơ sở dữ liệu.
+    - Cung cấp môi trường tạo lập cơ sở dữ liệu
+    - Cung cấp cách cập nhật và khai thác dữ liệu
+    - Cung cấp các công cụ kiểm soát, điều khiển các truy cập vào cơ sở dữ liệu.
 Các hệ quản trị cơ sở dữ liệu phổ biến
 1. Oracle: 
 2. MySQL: Thích hợp cho các ứng dụng có truy vấn CSDL trên internet
