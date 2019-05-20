@@ -1,19 +1,20 @@
 #!/bin/bash
 
-yum list installed > $HOME/test.txt
-rpm -qa > $HOME/test.txt
-a=`grep '/^wget\|^curl\|^mtr\|^httpd' test.txt`
-b=(curl wget mtr httpd)
+a=(httpd curl wget mtr)
 
-echo $a | grep -o -E wget\|curl\|mtr\|httpd > test2.txt
-
-for i in "${b[@]}"
+for i in "${a[@]}"
 do
-        d=`grep $i test2.txt`
-        #echo $d
-                if [$d=""]
-                then
-                        echo $d
-                        yum install $i
-                fi
+        if [ `rpm -qa $i` ]
+        then
+                echo "$i installed"
+        else
+                echo "$i don't install"
+                echo $i >> test2.txt
+        fi
 done
+
+for i in `cat $HOME/test2.txt`
+do
+        yum install -y $i
+done
+

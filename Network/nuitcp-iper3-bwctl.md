@@ -132,4 +132,19 @@ Ngoài ra còn một số commnd đi kèm như
 bwping
 bwtraceroute
 ```
+## Sự khác nhau giữa iperf3, nuttcp và bwctl
 
+Trước hết, bwctl chỉ là phần vỏ, phía bên trong của ứng dụng vẫn là chạy các chương trình iperf3.
+Sự khác nhau giữa iperf3 và nuttcp
+
+|Đặc trưng|iperf3.1.5+|nuttcp 8.x|
+|---------|-----------|----------|
+| JSON output|--json||
+| FQ-based pacing|--fq-rate||
+|multicast support||-m|
+|retransmit and CWND report|on by default|-br/-bc|
+|skip TCP slow start|--omit||
+|set TCP congestion control alg|--congestion||
+|zero-copy (sendfile)|--zerocopy||
+|UDP burst mode||-Ri#/#|
+|MS Windows support|no|no|
