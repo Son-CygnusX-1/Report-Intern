@@ -4,6 +4,7 @@
 Đánh giá tuyến đường cụ thể mà lưu lượng truy cập mạng đi theo đưa ra một số thách thức khắc phục sự cố. Traceroute sử dụng *time to live* trong giao thức IP để thu hút phản hồi `ICMP TIME_EXCEEDED` từ mỗi cổng dọc theo đường dẫn đến máy chủ đích.
 
 Các option
+
 |command|Ý nghĩa|
 |-------|-------|
 |-f|Đặt thời gian sống ban đầu được sử dụng trong gói thăm dò đầu tiên|
