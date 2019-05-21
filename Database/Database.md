@@ -125,13 +125,25 @@ Tính linh hoạt của key-value bị đánh đổi bằng tính chuẩn xác. 
 10. Cơ sở dữ liệu biểu đồ.
 
 ## Enable log mysql
+Trong mysql có 3 loại log: Error log, General log, Show query log
 
+* Error log
 ```
 vi /etc/my.cnf
 ```
 ```
 [mysqld]
 log_error = /var/log/mysql/error.log
+```
+* General log
+```
+general_log_file   = /var/log/mysql/mysql.log
+general_log        = 1
+```
+* Show query log
+```
+log_slow_queries       = /var/log/mysql/mysql-slow.log
+long_query_time 	= 2
 ```
 
 ## install NTP
@@ -200,3 +212,12 @@ Các hệ quản trị cơ sở dữ liệu phổ biến
 5. MongoDB: Tập tài liệu dùng NoSQL để truy vấn, viết bởi C++
 6. SQlite: thích hợp với các ứng dụng mobile
 7. Redis: phát triển theo phong cách NoSQL (key-value)
+## phpMyadmin
+* Hãy chắc chắn rằng bạn đã cài php, repo epel, nếu không sử dụng lệnh `yum install epel-release`
+Sau đó install phpMyAdmin
+```
+yum install phpmyadmin
+```
+* File config nằm trong `/etc/httpd/conf.d/phpMyAdmin.conf`
+Sửa ip `127.0.0.1` thành ip của máy chạy phpMyAdmin. Thêm quyền accept cho ip các máy muốn truy cập đến phpMyAdmin này vào trường
+`Require` 
