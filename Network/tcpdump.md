@@ -29,6 +29,7 @@ Sau khi dừng, sẽ hiện ra một bảng với các thông số:
 `time-stamp src > dst:  flags  data-seqno  ack  window urgent options`
 
 |Tên trường|Mô tả|
+|----------|-----|
 |Time-stamp|hiển thị thời gian gói tin được capture.|
 |Src và dst|hiển thị địa IP của người gửi và người nhận.|
 |Cờ Flag|S(SYN): Được sử dụng trong quá trình bắt tay của giao thức TCP.
