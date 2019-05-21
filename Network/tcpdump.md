@@ -32,11 +32,7 @@ Sau khi dừng, sẽ hiện ra một bảng với các thông số:
 |----------|-----|
 |Time-stamp|hiển thị thời gian gói tin được capture.|
 |Src và dst|hiển thị địa IP của người gửi và người nhận.|
-|Cờ Flag|S(SYN): Được sử dụng trong quá trình bắt tay của giao thức TCP.
-(ACK): Được sử dụng để thông báo cho bên gửi biết là gói tin đã nhận được dữ liệu thành công.
-F(FIN): Được sử dụng để đóng kết nối TCP.
-P(PUSH): Thường được đặt ở cuối để đánh dấu việc truyền dữ liệu.
-R(RST): Được sử dụng khi muốn thiết lập lại đường truyền.|
+|Cờ Flag| S(SYN): Được sử dụng trong quá trình bắt tay của giao thức TCP.   (ACK): Được sử dụng để thông báo cho bên gửi biết là gói tin đã nhận được dữ liệu thành công.   F(FIN): Được sử dụng để đóng kết nối TCP.   P(PUSH): Thường được đặt ở cuối để đánh dấu việc truyền dữ liệu.    R(RST): Được sử dụng khi muốn thiết lập lại đường truyền. |
 |Data-sqeno|Số sequence number của gói dữ liệu hiện tại.|
 |ACK|Mô tả số sequence number tiếp theo của gói tin do bên gửi truyền (số sequence number mong muốn nhận được).|
 |Window|Vùng nhớ đệm có sẵn theo hướng khác trên kết nối này.|
