@@ -1,3 +1,16 @@
+## Install mysql-server
+
+* Tải repo để cài mysql-server (nếu không mặc định gói MariaDB sẽ đc tải về khi chạy `yum install mysql`
+```
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+yum update
+```
+Tải mysql-server và khởi động dịch vụ
+```
+yum install mysql-server
+systemctl start mysqld
+```
 ## Phân quyền trong SQL
 Đặt mật khẩu root cho MySQL với lần đăng nhập đầu
 ```
@@ -145,44 +158,79 @@ general_log        = 1
 log_slow_queries       = /var/log/mysql/mysql-slow.log
 long_query_time 	= 2
 ```
-
-## install NTP
-NTP (network time protocol)
-Đây là giao thức đồng bộ thời gian giữa các máy chủ với nhau.
-
+### Command phổ biến
+* đăng nhập
 ```
-yum install NTP
+mysql -u <tên user> -p<mật khẩu>
+or
+mysql -u <tên user> -p
 ```
-File cấu hình trong `/etc/ntp.conf`
-Lệnh kiểm tra NTP server đã lấy được giờ chuẩn chưa
+Với cách bên dưới thì sẽ an toàn hơn vì cách trên sẽ viết pass ở dạng text
+* Chọn database
 ```
-ntpd -p
+USE <tên database>;
 ```
-### Lab
-* Server
-
-Cho phép các server trong mạng 172.16.0.0/24 kết nối đến NTP server
+* Hiển thị các giá trị của trường
 ```
-vi /etc/ntp.conf
-restrict 172.16.0.0 mask 255.255.255.0 nomodify notrap
-server vn.pool.ntp.org iburst
+Select
 ```
-
-* Client 
-
+VD: select username from user;
+* Tìm kiếm
 ```
-vi /etc/ntp.conf
-server <strong> <ip của server></strong> iburst
-restrict default ignore
+where
 ```
-Hoặc cài đặt ntpdate `yum install ntpdate` và cấu hình
+VD: select * from user where username='sonpt';
+* giống với (để hỗ trợ tìm kiếm)
 ```
-ntpdate <ip của server>
+where username LIKE 'son%';
 ```
-Tạo 1 crontab để check thời gian vào mỗi khoảng thời gian
+câu lệnh trên ý nghĩa tìm trường username có giá trị bắt đầu bằng chứ 'son'
+hay để tìm từ có cụm từ 'on' ở trong thì '%on%'
+* AND; OR; NOT (trong where)
+`AND` - thỏa mãn đồng thời
+`OR` - thỏa mãn 1 trong số
+`not` - không thỏa mãn
+* Update
 ```
-crontab -e
-*/5 * * * * /usr/sbin/ntpdate <ip server> 2>&1 | tee -a /var/log/ntpdate.log
+update <table>
+set <colum1 = value1>,...
+```
+* Insert
+Thêm giá trị vào các cột
+```
+insert into <tablename> (column1, ...)
+values (value1,...);
+```
+Thêm giá trị vào tất cả các cột
+```
+insert into <tablename>
+values (value1,...)
+```
+* Delete
+Xóa một hàng
+```
+delete from <tablename> where <điều kiện>;
+```
+* Drop
+Xóa database
+```
+drop database <databasename>;
+```
+Xóa table
+```
+drop table <tên bảng>;
+```
+* Tạo mới
+Bảng
+```
+create table <tablename> (
+col1 *datatype*,
+...
+);
+```
+Database
+```
+create database <databasename>;
 ```
 ### Backup và Restore MySQL database
 Backup
@@ -220,4 +268,23 @@ yum install phpmyadmin
 ```
 * File config nằm trong `/etc/httpd/conf.d/phpMyAdmin.conf`
 Sửa ip `127.0.0.1` thành ip của máy chạy phpMyAdmin. Thêm quyền accept cho ip các máy muốn truy cập đến phpMyAdmin này vào trường
-`Require` 
+`Require`
+Để đồng ý cho tất cả các máy đều có thể truy cập đến phpMyAdmin `Require all granted`
+```
+<IfModule mod_authz_core.c>
+     # Apache 2.4
+     <RequireAny>
+       Require ip 172.16.91.136
+#       Require all granted
+       Require ip 172.16.91.1
+       Require ip ::1
+     </RequireAny>
+   </IfModule>
+   <IfModule !mod_authz_core.c>
+     # Apache 2.2
+     Order Deny,Allow
+     Deny from All
+     Allow from 172.16.91.1
+     Allow from ::1
+   </IfModule>
+```
