@@ -140,6 +140,8 @@ Tính linh hoạt của key-value bị đánh đổi bằng tính chuẩn xác. 
 ## Enable log mysql
 Trong mysql có 3 loại log: Error log, General log, Show query log
 
+Tạo thư mục `/var/log/mysql/` phân quyền `mysql:mysql` cho thư mục
+
 * Error log
 ```
 vi /etc/my.cnf
