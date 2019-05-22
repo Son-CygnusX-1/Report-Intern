@@ -30,7 +30,8 @@ Cho phép tách rời App-OS cho phép phân phối lại ứng dụng cho phù 
 * Application stream: App được chia thành nhiều mã và được truyền sang máy người dùng khi cần đến. Thường sử dụng HTTP, CIFS hoặc RTSP
 * Desktop Virtualization / Desktop Infrastructure: App được cài và chạy trên máy ảo, một hạ tầng quản lý sẽ tự động tạo ra các desktop ảo và cung cấp desktop đến các đối tượng sử dụng.
 ## Ảo hóa hệ thống máy chủ
-* host-based: Sử dụng hypervisior chạy trên OS sử dụng dịch vụ đươc hệ điều hành cung cấp phân chia tài nguyên với máy ảo
-* Hypervisor-based:  hay còn gọi là bare-metal hypervisor. Chạy trực tiếp trên nền tảng phần cứng máy chủ.
+* host-based: Sử dụng hypervisior chạy trên OS sử dụng dịch vụ đươc hệ điều hành cung cấp phân chia tài nguyên với máy ảo.Một số hệ thống hypervisor dạng Hosted có thể kể đến như VMware Server, VMware Workstation, Microsoft Virtual Server…
+
+* Hypervisor-based:  hay còn gọi là bare-metal hypervisor. Chạy trực tiếp trên nền tảng phần cứng máy chủ. Các hypervisor này có khả năng điều khiển, kiểm soát phần cứng của máy chủ. Một số ví dụ về các hệ thống Bare-metal hypervisor như là Oracle  VM, VMware ESX Server, IBM's POWER Hypervisor, Microsoft's Hyper-V, Citrix XenServer…
 
 ![aohoa](image/aohoa.png)
